@@ -1,0 +1,49 @@
+Upper Bound:
+. refers to an estimation of the maximum value or limit that a quantity can reach.
+. In the context of algorithm analysis and Big O notation, an upper bound provides an upper limit on the growth rate of an algorithm's time or space complexity.
+. When we say that an algorithm has an upper bound of O(f(n)), we mean that the algorithm's time or space complexity will not grow faster than the function f(n), where n represents the input size.
+. In other words, the upper bound indicates that the algorithm's performance will not be worse than what is described by the function f(n).
+
+For example:
+
+ . If an algorithm has an upper bound of O(n^2), it means that the algorithm's performance will not grow faster than a quadratic function of the input size. This suggests that the algorithm's running time or memory usage will increase at most quadratically as the input size increases.
+
+ . If an algorithm has an upper bound of O(n log n), it means that the algorithm's performance will not grow faster than a linearithmic function of the input size. This suggests that the algorithm's running time or memory usage will increase at most linearithmically as the input size increases.
+
+Upper bounds are useful for characterizing the worst-case behavior of an algorithm. They help us understand how an algorithm's efficiency scales as the problem size grows. While upper bounds provide a guarantee that the algorithm won't perform worse than a certain function, they don't provide information about the precise constant factors or lower-order terms that might affect actual performance.
+
+When analyzing algorithms, it's common to use upper bounds in the form of Big O notation to provide a concise and simplified description of the algorithm's behavior. This allows for easy comparison and classification of algorithms based on their growth rates.
+
+
+O(f(n)):
+In the context of algorithm analysis and Big O notation, "O(f(n))" represents the upper bound on the growth rate of an algorithm's time or space complexity. It is used to describe how the performance of an algorithm scales as the size of the input "n" increases.
+
+Here's what the notation "O(f(n))" means:
+- O: This stands for "order of" or "big O," and it indicates that we are describing the upper bound of the growth rate.
+- f(n): This represents a function of the input size "n" that characterizes the algorithm's growth rate. The function "f(n)" describes how the algorithm's time or space complexity changes relative to the input size.
+
+For example:
+- If an algorithm has a time complexity of O(n), it means that the number of operations performed by the algorithm grows linearly with the size of the input "n."
+- If an algorithm has a time complexity of O(n^2), it means that the number of operations grows quadratically with the input size.
+- If an algorithm has a space complexity of O(log n), it means that the amount of memory used by the algorithm grows logarithmically with the input size.
+- If an algorithm has a space complexity of O(n log n), it means that the memory usage grows linearithmically with the input size.
+
+The "O(f(n))" notation provides a high-level description of an algorithm's efficiency by focusing on the dominant factor that affects its growth rate. It allows for easy comparison between different algorithms and helps developers and analysts understand how algorithms will perform as the input size becomes larger.
+
+It's important to note that Big O notation describes an upper bound, which means that the algorithm's actual performance will not exceed the specified growth rate. However, the actual performance could be better (faster or more efficient) than what is indicated by the upper bound, especially for small input sizes or in practical scenarios.
+
+
+Big O: (denoted as O())-
+. describe the upper bound of the growth rate of an algorithm's time or space complexity. 
+. It provides a way to characterize how the performance of an algorithm scales as the size of the input increases.
+. used to analyze and compare the efficiency of algorithms without getting into the specifics of constant factors and lower-order terms, which may vary depending on the hardware and software environment.
+
+Here are some key points about Big O notation:
+. Upper Bound: Big O notation represents an upper bound on the complexity of an algorithm. It describes the worst-case scenario in terms of time or space usage.
+. Simplified Expression: Big O notation simplifies the complexity analysis by focusing on the most significant factor that influences the algorithm's growth rate.
+. O(f(n)): In Big O notation, "f(n)" represents a function that describes the growth rate of an algorithm. For example, if an algorithm has a time complexity of O(n^2), it means that the number of operations grows quadratically with the input size.
+. Examples: Some common examples of Big O notations are O(1) (constant time), O(log n) (logarithmic time), O(n) (linear time), O(n log n) (linearithmic time), O(n^2) (quadratic time), O(2^n) (exponential time), etc.
+. Comparisons: Big O notation allows you to compare different algorithms and assess their relative efficiency with respect to the input size. For example, an algorithm with O(n) time complexity is generally more efficient than one with O(n^2) time complexity for large inputs.
+. Ignoring Constants: Big O notation disregards constant factors, which means that an algorithm with O(100n) would still be denoted as O(n). This is because constant factors become less significant as the input size becomes very large.
+. Asymptotic Analysis: Big O notation is part of asymptotic analysis, which focuses on the behavior of functions as they approach infinity. It provides insights into how algorithms perform as the input size grows towards infinity.
+. Best, Worst, and Average Cases: Big O notation often describes the worst-case time complexity of an algorithm, but it can also be used to describe best-case and average-case complexities, denoted as Ω (Omega) and Θ (Theta) notations, respectively.

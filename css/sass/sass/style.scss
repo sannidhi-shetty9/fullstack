@@ -1,0 +1,61 @@
+// Sass (Syntactically Awesome Style Sheets) is a CSS preprocessor that extends the capabilities of regular CSS. It introduces features like variables, nested rules, mixins, and more, which can help make your CSS code more maintainable and efficient. Sass code is then compiled into standard CSS that browsers can understand.
+
+// Here's a basic overview of some key features of Sass:
+
+// 1. Variables: Sass allows you to define variables to store reusable values, such as colors, fonts, or sizes. This can make it easier to maintain consistent styles throughout your project.
+
+$primary-color: #3498db;
+
+.button {
+  background-color: $primary-color;
+}
+
+// 2. Nesting: You can nest selectors within each other to indicate the hierarchical relationship of the HTML structure. This can make your styles more organized and easier to read.
+
+.nav {
+  ul {
+    list-style: none;
+  }
+  li {
+    padding: 5px;
+  }
+}
+
+// 3. Mixins: Mixins are reusable blocks of code that can be included in multiple places. They are useful for applying a set of styles to different selectors.
+
+@mixin border-radius($radius) {
+  border-radius: $radius;
+}
+
+.button {
+  @include border-radius(5px);
+}
+
+// 4. Import: Sass allows you to split your styles into separate files and then import them into a main Sass file. This can help you organize your styles into manageable chunks.
+
+// @import 'variables';
+// @import 'buttons';
+
+// 5. Operators: Sass supports basic arithmetic operations and more, which can be helpful for calculating values.
+
+$base-padding: 10px;
+
+.element {
+  padding: $base-padding * 2;
+}
+
+// 6. Extends: Sass provides the `@extend` directive, which allows you to inherit the styles from one selector to another, reducing redundancy.
+
+.button {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.submit-button {
+  @extend .button;
+  background-color: #3498db;
+}
+
+// Sass needs to be compiled into regular CSS before it can be used in web pages. You can use command-line tools, build systems like Gulp or Webpack, or online services to compile Sass into CSS.
+
+// It's worth noting that there are two syntaxes for writing Sass: the original, indented syntax (often referred to as Sass) and the newer, SCSS (Sassy CSS) syntax that resembles regular CSS with added Sass features. SCSS is generally more popular and widely used.

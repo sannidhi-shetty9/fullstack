@@ -1,0 +1,19 @@
+$heading_color: green;
+
+@mixin common_rule($width, $color, $type, $fontSize) {
+  border: $width $color $type;
+  font-size: $fontSize;
+}
+
+h3 {
+    color: $heading_color;
+    
+  }
+  
+  #cnt1 {
+    @include common_rule(2px, yellow, solid, 14px );
+
+    span {
+      color: red;
+    }
+  }

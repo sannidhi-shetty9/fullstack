@@ -1,0 +1,64 @@
+Using SCSS with Node.js involves setting up a build process that compiles your SCSS files into regular CSS using a package like `sass`. Here's a step-by-step guide on how to achieve this:
+
+1. **Create a Project Directory**: Create a new directory for your project and navigate to it in the terminal.
+
+2. **Initialize a Node.js Project**: Run the following command to initialize a Node.js project and create a `package.json` file:
+
+   ```sh
+   npm init -y
+   ```
+
+3. **Install `sass` Package**: Install the `sass` package as a development dependency:
+
+   ```sh
+   npm install sass --save-dev
+   ```
+
+4. **Create SCSS and CSS Directories**: Inside your project directory, create directories to organize your SCSS and CSS files. For example:
+
+   ```plaintext
+   project-directory/
+   ├── scss/
+   │   └── styles.scss
+   └── css/
+   ```
+
+5. **Create SCSS File**: Create your SCSS file (e.g., `styles.scss`) in the `scss` directory.
+
+6. **Compile SCSS to CSS**: Create a script to compile your SCSS file to CSS in your `package.json` file:
+
+   Open your `package.json` file and add a script like this:
+
+   ```json
+   "scripts": {
+     "compile-scss": "sass scss/styles.scss css/styles.css"
+   }
+   ```
+
+   This script tells Node.js to compile `scss/styles.scss` into `css/styles.css`.
+
+7. **Compile**: Run the compilation script using npm:
+
+   ```sh
+   npm run compile-scss
+   ```
+
+   This will compile your SCSS file into CSS.
+
+8. **Watching for Changes**: If you want to watch for changes in your SCSS files and automatically compile them whenever you save, you can modify the script in your `package.json` like this:
+
+   ```json
+   "scripts": {
+     "watch-scss": "sass --watch scss:css"
+   }
+   ```
+
+   Then, you can run the watch script using:
+
+   ```sh
+   npm run watch-scss
+   ```
+
+   This will continuously watch for changes in your SCSS files and compile them to CSS whenever a change is detected.
+
+By following these steps, you can integrate SCSS into your Node.js project and easily compile your SCSS files into CSS using the `sass` package.

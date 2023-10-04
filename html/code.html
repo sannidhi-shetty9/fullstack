@@ -1,0 +1,105 @@
+<!-- declares the doucment as html 5 document -->
+<!DOCTYPE html>
+<html>
+<head>
+<title>What is HTML?</title>
+
+</head>
+<!-- <body BGCOLOR="black"> -->
+<body>
+    
+<audio src="https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3" controls ></audio>
+<!-- <h1>video</h1>
+    <video src="https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4" controls height="100" width="100">video not available </video> -->
+
+<video controls>
+    <source src="https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4" />
+</video>
+<h1><font color="white">Welcome to Edureka!</font></h1>
+<p><font color="white">Learn about HTML <a href="www.edureka.co">here</a></font></p>
+<center><img src="image.jpg" alt="Edureka" style="width:640px;height:360px"></center>
+<a href="#myCanvas">to canvas</a>
+<h4 title="full stack">Courses:</h4>
+<ol type="A"><font color="black" >
+<li>Full Stack</li>
+<li>Java</li>
+<li>Python</li>
+<li>Cloud Computing</li>
+</ol></font>
+<button>Click here</button>
+
+<table border="1" bgcolor="yellow" cellpadding="10" cellspacing="20" height="300px" width="400px" align="center" >
+    <thead>
+        <th>No.</th>
+        <th>Name</th>
+    </thead>
+    <tbody >
+        <tr>
+            <td>1</td>
+            <td>Amit</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Ankit</td>
+        </tr>
+        </tbody>
+        
+    </tbody>
+</table>
+
+<h1> Html Inputs</h1>
+
+<h3>Data List</h3>
+
+<input type="text" list="cities" placeholder="enter city" />
+        <datalist id="cities">
+            <option>Delhi</option>
+            <option>Mumbai</option>
+        </datalist>
+
+    </br>
+
+    <h1 draggable="true">I am draggable</h1>
+</br>
+
+<h4>SVG</h4>
+
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+    <circle cx="100" cy="100" r="50" fill="blue" />
+  </svg>
+
+<h4>Canvas</h4>
+
+<canvas width="400" height="400" id="myCanvas" style="border: 1px solid red" />
+
+<script>
+    const angleToRadian = degree => degree*(Math.PI/180);
+    var canvas = document.getElementById('myCanvas');
+    var ctx = canvas.getContext('2d'); // gets a rendering context (object obtained from context) - provides methods and properties for drawing and manipulating context
+    ctx.fillStyle = "rgb(200, 0, 200)";
+    ctx.fillStyle = "#97ffff";
+    ctx.fillRect(50, 40, 100, 30); // (x, y, width, height)
+
+    ctx.strokeStyle= "green"; // line color
+    ctx.beginPath(); // Begin drawing 
+    ctx.moveTo(20, 20);
+    ctx.lineTo(100,20);
+    ctx.lineTo(100,100);
+    ctx.lineTo(20,100);
+    ctx.closePath();
+    ctx.stroke(); //draws the line
+
+    ctx.strokeStyle= "blue"; // line color
+    
+    ctx.beginPath();
+    ctx.arc(100, 150, 45, angleToRadian(0), angleToRadian(150)); //(x,y, radius, starting angle, ending angle)
+    ctx.closePath();
+    ctx.stroke();
+    ctx.fillStyle = "#97ffff";
+    ctx.fill();
+</script>
+
+
+</body>
+</html>
+

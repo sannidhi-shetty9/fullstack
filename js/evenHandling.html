@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Event handling</title>
+    </head>
+    <body>
+        <div style="border: 1px solid black; padding: 5px;" class="grandparent">
+        <div style="border: 1px solid red; padding: 5px;" class="parent">
+        <div style="border: 1px solid green; padding: 5px;" class="child">
+            click me!
+        </div>
+        </div>
+        </div>
+        <script>
+            const TRICKLEDOWN = true; // method of event propagation. on event, handlers runs from parents/ancestors to child in hierarchy
+            const BUBBLING = false; // (default behavior) method of event propagation. on event, handlers runs from child to parents/ancestors in hierarchy
+            const userCapture = false;
+            const grandparent = document.querySelector(".grandparent");
+            const parent = document.querySelector(".parent");
+            const child = document.querySelector(".child");
+            grandparent.addEventListener("click", () => {console.log("grandparent element clicked !")}, userCapture) // usercapture specifies event propagation
+            parent.addEventListener("click", () => {console.log("parent element clicked !")}, userCapture)
+            child.addEventListener("click", () => {console.log("child element clicked !")}, userCapture)
+        </script>
+    </body>
+</html>

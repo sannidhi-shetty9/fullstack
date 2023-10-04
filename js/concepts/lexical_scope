@@ -1,0 +1,29 @@
+Lexical scope, also known as static scope or lexical scoping, is a concept in programming languages that determines how variable names and function declarations are resolved at compile time or during the lexical analysis phase, based on the program's source code structure.
+
+In a language that follows lexical scoping rules, the scope of a variable or function is determined by its position in the source code where it is defined (lexically) rather than by the location where it is called or executed during runtime.
+
+Key characteristics of lexical scope:
+
+1. Scope Hierarchy: Lexical scope creates a hierarchical structure of nested scopes. A new scope is created whenever a block or function is defined, and each inner scope can access variables and functions declared in its containing (outer) scope. However, the outer scopes cannot access variables declared within inner scopes.
+2. Static Resolution: Variable and function name resolution is determined at compile time, based on the lexical structure of the code. This means that the compiler or interpreter can determine the variable references without executing the code.
+3. Closures: Lexical scoping enables closures, a powerful feature in programming languages. Closures allow functions to "remember" the scope in which they were defined, even if they are executed in a different scope. This behavior enables functions to maintain references to variables from their enclosing (lexical) scope even after the outer function has finished executing.
+
+JavaScript is a language that follows lexical scoping rules. Consider the following example:
+
+```javascript
+function outerFunction() {
+  const outerVar = 10;
+
+  function innerFunction() {
+    console.log(outerVar); // innerFunction has access to outerVar due to lexical scope
+  }
+
+  innerFunction();
+}
+
+outerFunction();
+```
+
+In this example, `innerFunction` has access to the variable `outerVar` declared in its containing scope, `outerFunction`. This is possible because of lexical scoping. When `innerFunction` is called, it "remembers" its lexical scope, allowing it to access variables from that scope even though it is executed in a different context.
+
+Lexical scoping provides a predictable and organized way to manage variable access and ensures that variables are accessible in the appropriate contexts, making code easier to reason about and maintain.

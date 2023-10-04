@@ -1,0 +1,103 @@
+:root{
+    font-size: 12px;
+    box-sizing: border-box;
+    /* background: lightblue  url("https://www.gstatic.com/webp/gallery/1.jpg") no-repeat fixed right top;
+    background-size: cover; */
+}
+
+div {
+    border: 1px solid black;
+    display: inline-block;
+}
+
+#boxModel {
+    border: 1px solid black;
+    height: 2700px;
+    width: 100%;
+    /* width: 400px; */
+    font-size: 20px;
+    /* padding: 10px; */
+    /* position: relative; */
+
+}
+
+#boxModel div {
+    border: 1px solid red;
+    padding: 10px;
+    margin: 10px;
+    /* height: 100px; */
+    /* width: 100px; */
+    position: relative;
+
+}
+
+#boxEl1 {
+    left: 60px;
+    top: 400px;
+    background-color: lightblue;
+    /* z-index: 0; */
+    /* opacity: 0; */
+    /* position: absolute; */
+
+}
+
+#boxEl2 {
+    left: 0px;
+    background-color: lightyellow;
+    /* z-index: -2; */
+}
+
+#boxEl3 {
+    background-color: lightpink;
+    /* position: absolute; */
+    right: 50px;
+    top: 100px;
+}
+
+
+
+
+
+
+
+
+
+
+
+span {
+    border: 1px solid green;
+    display: inline-block;
+    width: 300px;
+    height: 50px;
+}
+div {
+    /* font-size: 50px; */
+    border: 1px solid red;
+    /* max-width: 200px; */
+    /* min-width: 100px; */
+    /* width: 50px; */
+    height: 10rem;
+    /* min-height: 200px; */
+}
+
+div .cnt1 {
+    color: green;
+}
+
+.el1 {
+    font-weight: 600;
+}
+
+.cnt1 {
+    color:yellow;
+}
+
+body2 {
+    
+    /* background-color: lightblue;
+    background-image: url("https://www.gstatic.com/webp/gallery/1.jpg");
+    background-repeat: no-repeat; */
+    /* background: lightblue  url("https://www.gstatic.com/webp/gallery/1.jpg") no-repeat fixed right top;
+    background-size: cover; */
+}
+

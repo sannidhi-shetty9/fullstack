@@ -1,0 +1,365 @@
+
+data integrity -> accuracy and reliability of data (the correct data is accessed every time)
+data consistency -> data remains consistent (does not change)
+
+-------
+databases
+
+A database is a structured collection of data that is organized and stored in a way that allows for efficient retrieval, management, and manipulation of data. Databases are fundamental to modern software applications and play a crucial role in storing and managing data of various types, including text, numbers, images, and more.
+
+There are several types of databases, each designed for specific use cases and requirements. Here are some common types of databases:
+1. Relational Databases (RDBMS):
+   - Relational databases are based on the relational model of data, where data is organized into tables with rows and columns.
+   - They use Structured Query Language (SQL) for defining schema, querying data, and managing transactions.
+   - Popular relational database management systems (RDBMS) include MySQL, PostgreSQL, Oracle Database, and Microsoft SQL Server.
+2. NoSQL Databases:
+   - NoSQL databases are designed to handle unstructured or semi-structured data and offer more flexibility in data modeling.
+   - Common types of NoSQL databases include document stores (e.g., MongoDB), key-value stores (e.g., Redis), column-family stores (e.g., Cassandra), and graph databases (e.g., Neo4j).
+3. In-Memory Databases:
+   - In-memory databases store data in system memory (RAM) rather than on disk, which allows for extremely fast data access.
+   - They are often used for caching, real-time analytics, and applications that require low-latency data access.
+4. Time-Series Database*:
+   - Time-series databases are optimized for storing and querying time-stamped data, such as sensor readings, log data, and financial market data.
+5. NewSQL Databases:
+   - NewSQL databases combine the benefits of traditional SQL databases with the scalability and flexibility of NoSQL databases. They aim to provide the best of both worlds.
+6. Graph Databases:
+   - Graph databases are designed for managing data with complex relationships, making them suitable for applications like social networks and recommendation engines.
+7. Columnar Databases:
+   - Columnar databases store data in columns rather than rows, which can be more efficient for analytical queries that involve aggregations and filtering.
+8. Object Databases:
+   - Object databases are designed to store and retrieve objects directly, making them a good choice for object-oriented programming languages.
+9. Geospatial Databases:
+   - Geospatial databases are specialized databases for storing and querying geographical data, such as maps, locations, and spatial relationships.
+
+Databases are an essential part of most software applications, including web applications, mobile apps, desktop software, and more. They provide a structured and efficient way to store, retrieve, and manipulate data, making it possible to build powerful and data-driven applications. The choice of a database type depends on the specific requirements and characteristics of the application and the data it needs to manage.
+
+---
+DBMS stands for "Database Management System." It is software that manages databases, providing an interface for users and applications to interact with data stored in the database. DBMS systems handle tasks such as data storage, retrieval, organization, security, and data integrity. They serve as a crucial component in many software applications, enabling efficient data management and access.
+
+Here are some key features and functions of a Database Management System (DBMS):
+1. Data Storage: DBMS systems store data in a structured manner, typically using tables with rows and columns (as in relational databases) or other data structures (in NoSQL databases).
+2. Data Retrieval: DBMS systems provide mechanisms to query and retrieve data from the database using query languages like SQL (Structured Query Language) for relational databases.
+3. Data Organization: DBMS systems define the structure and relationships among data elements, allowing for efficient data organization and normalization to reduce redundancy.
+4. Concurrency Control: DBMS systems handle multiple users or applications accessing the database simultaneously, ensuring data consistency and preventing conflicts through concurrency control mechanisms.
+5. Data Integrity: DBMS systems enforce data integrity constraints to maintain the accuracy and reliability of data, including primary keys, foreign keys, and unique constraints.
+6. Security: DBMS systems implement security measures to control access to data, including user authentication, authorization, and encryption.
+7. Transaction Management: They support transaction processing, allowing a series of database operations to be grouped into a single, atomic unit to ensure consistency.
+8. Backup and Recovery: DBMS systems provide mechanisms for data backup and disaster recovery to protect against data loss.
+9. Indexing: Indexes are used to speed up data retrieval by providing fast access to specific data records.
+10. Query Optimization: DBMS systems optimize query execution plans to improve query performance.
+11. ACID Properties: Many DBMS systems adhere to the ACID (Atomicity, Consistency, Isolation, Durability) properties to guarantee data reliability and transaction integrity.
+12. Replication and Clustering: Some DBMS systems support replication and clustering for high availability and fault tolerance.
+13. Scalability: They offer mechanisms for scaling databases horizontally (adding more servers) or vertically (increasing server resources) to handle increased loads.
+
+There are various types of DBMS systems, each suited to specific use cases and data models:
+- Relational DBMS (RDBMS): Organize data into tables with predefined schemas and support SQL for querying. Examples include MySQL, PostgreSQL, Oracle Database, and Microsoft SQL Server.
+- NoSQL DBMS: Handle unstructured or semi-structured data, offering flexibility in data modeling. Types include document stores (e.g., MongoDB), key-value stores (e.g., Redis), column-family stores (e.g., Cassandra), and graph databases (e.g., Neo4j).
+- In-Memory DBMS: Store data in system memory for extremely fast access. Examples include Redis and Apache Ignite.
+- Columnar DBMS: Store data in columns rather than rows, optimized for analytical queries. Examples include Apache Cassandra and Google Bigtable.
+- NewSQL DBMS: Combine features of traditional SQL databases with scalability and flexibility of NoSQL databases.
+
+The choice of a DBMS depends on factors such as the application's requirements, data volume, scalability needs, and performance goals. Different DBMS systems excel in different scenarios, and choosing the right one is crucial for efficient data management in an application.
+
+---
+schema: (structure)
+A schema is the logical structure or blueprint that defines how data is organized, stored, and accessed within a database. A schema defines the structure of tables, the relationships between tables, data types, constraints, and other rules that govern how data is stored and manipulated.
+
+Here are key aspects of a database schema:
+1. Tables: A schema defines the tables that exist within a database. Each table represents a particular entity or data category and is composed of rows and columns. The schema specifies the names of tables and their associated attributes (columns).
+2. Columns: For each table, the schema specifies the columns (fields) that make up the table. Each column has a name, a data type (e.g., integer, string, date), and optionally, constraints such as primary keys, foreign keys, and unique constraints.
+3. Data Types: The schema defines the data types that can be used for each column. Data types determine the kind of data that can be stored in a column (e.g., numbers, text, dates, binary data).
+4. Constraint: Constraints are rules that ensure data integrity and consistency within the database. Common constraints include:
+   - Primary Key: Ensures that each row in a table has a unique identifier.
+   - Foreign Key: Defines relationships between tables by referencing the primary key of another table.
+   - Unique Constraint: Ensures that values in a column are unique within the table.
+   - Check Constraint: Defines a condition that data in a column must meet (e.g., age > 0).
+   - Default Value: Specifies a default value for a column when no value is provided during data insertion.
+   - Not Null Constraint: Ensures that a column must have a value (cannot be null).
+5. Relationships: In a relational database, the schema defines the relationships between tables using foreign keys. These relationships establish how data in one table is related to data in another.
+6. Views: Some database management systems allow the creation of views, which are virtual tables based on the schema. Views can present data from one or more tables in a specific way without physically storing the data.
+7. Stored Procedures and Functions: The schema may also include definitions of stored procedures and functions, which are pre-defined sets of SQL statements that can be executed as a single unit.
+8. Security and Permissions: Schema definitions can include access control rules, specifying who can read, write, or modify data in specific tables or columns.
+
+There are typically two types of schemas:
+- Logical Schema: The logical schema describes the database structure at a high level, focusing on the organization of data, tables, and relationships between them. It is independent of the physical implementation details.
+- Physical Schema: The physical schema deals with how data is physically stored on disk, including details such as file organization, indexing, and optimization for performance.
+
+Database management systems (DBMS), including both relational and NoSQL databases, use schemas to ensure data consistency and facilitate data management. While relational databases follow a structured schema approach, NoSQL databases may offer more flexibility with dynamic or schema-less data models, depending on the specific type of NoSQL database being used.
+
+---
+SQL
+SQL, which stands for "Structured Query Language," is a domain-specific programming language used for managing and manipulating relational databases. SQL provides a standardized way to interact with relational database management systems (RDBMS) and is used for tasks such as querying data, inserting, updating, and deleting records, defining database schema, and controlling access to data. SQL is a fundamental tool for anyone working with relational databases.
+
+Here are some key aspects of SQL:
+1. Querying Data:
+   - SQL allows you to retrieve data from a database using the `SELECT` statement. You can specify which columns you want to retrieve, filter data based on conditions, and sort the results.
+   Example:
+   ```sql
+   SELECT first_name, last_name FROM employees WHERE department = 'HR';
+   ```
+2. Inserting Data:
+   - You can use the `INSERT` statement to add new records to a table.
+   Example:
+   ```sql
+   INSERT INTO customers (customer_name, email) VALUES ('John Doe', 'john@example.com');
+   ```
+3. Updating Data:
+   - The `UPDATE` statement allows you to modify existing records in a table.
+   Example:
+   ```sql
+   UPDATE products SET price = 25.99 WHERE product_id = 101;
+   ```
+
+4. Deleting Data:
+   - The `DELETE` statement is used to remove records from a table based on specified conditions.
+   Example:
+   ```sql
+   DELETE FROM orders WHERE order_status = 'cancelled';
+   ```
+5. Creating and Modifying Schema:
+   - SQL provides commands for creating and altering database objects such as tables, indexes, and constraints.
+   Example (creating a table):
+   ```sql
+   CREATE TABLE employees (
+     employee_id INT PRIMARY KEY,
+     first_name VARCHAR(50),
+     last_name VARCHAR(50),
+     department VARCHAR(30)
+   );
+   ```
+   Example (adding a new column):
+   ```sql
+   ALTER TABLE customers ADD COLUMN phone_number VARCHAR(15);
+   ```
+6. Aggregation and Grouping:
+   - SQL supports functions like `SUM`, `COUNT`, `AVG`, and `GROUP BY` to perform aggregations and generate summary reports.
+   Example:
+   ```sql
+   SELECT department, AVG(salary) AS avg_salary FROM employees GROUP BY department;
+   ```
+7. Joining Tables:
+   - SQL enables you to combine data from multiple tables using `JOIN` operations.
+   Example:
+   ```sql
+   SELECT orders.order_id, customers.customer_name
+   FROM orders
+   JOIN customers ON orders.customer_id = customers.customer_id;
+   ```
+8. Transactions:
+   - SQL supports transactions, allowing you to group multiple SQL statements into an atomic unit of work that is either fully completed or fully rolled back in case of failure.
+   Example:
+   ```sql
+   BEGIN TRANSACTION;
+   -- SQL statements here
+   COMMIT;
+   ```
+9. Data Constraints and Integrity:
+   - SQL provides mechanisms to enforce data integrity constraints such as primary keys, foreign keys, unique constraints, and check constraints.
+
+SQL is a powerful language used in a wide range of applications, including web development, data analysis, business intelligence, and more. Different database management systems (e.g., MySQL, PostgreSQL, Oracle, Microsoft SQL Server) implement SQL with slight variations, so knowledge of SQL is transferrable across different RDBMS platforms.
+
+--
+RDBMS
+RDBMS stands for "Relational Database Management System." It is a type of Database Management System (DBMS) that organizes and manages data using a relational data model. In an RDBMS, data is structured into tables with rows and columns, and relationships between tables are defined using keys. The primary goal of an RDBMS is to provide a reliable, efficient, and consistent way to store, retrieve, and manipulate structured data.
+
+Here are key features and characteristics of RDBMS:
+1. Tables: Data is stored in tables, where each table represents an entity or data category. Each row in a table represents a specific data record, and each column represents an attribute or field.
+    Rows represent individual records or tuples, while columns represent attributes or fields of the data, which define the type of data that can be stored in them. Attributes have names and data types (e.g., integer, string, date) associated with them.
+2. Schema: RDBMS defines a schema that specifies the structure of tables, including the data types of columns, primary keys, foreign keys, and constraints. The schema enforces data integrity and consistency.
+3. SQL: RDBMS systems use the Structured Query Language (SQL) to interact with the database. SQL provides a standardized language for querying, inserting, updating, and deleting data, as well as for defining database schema.
+4. Relationships: Tables can be related to each other through keys. The most common types of relationships are one-to-one, one-to-many, and many-to-many. Foreign keys are used to establish and maintain these relationships.
+5. ACID Properties: RDBMS systems typically adhere to the ACID properties (Atomicity, Consistency, Isolation, Durability) to ensure data integrity and transaction management. Transactions are atomic and are either completed in full or not at all.
+6. Normalization: RDBMS encourages data normalization, which involves minimizing data redundancy by organizing data efficiently across multiple tables. This reduces storage space and maintains data consistency.
+7. Indexes: Indexes are used to improve query performance by providing fast access to specific data records. Indexes are typically created on columns frequently used in search and filtering operations.
+8. Concurrency Control: RDBMS systems support multiple concurrent users or transactions accessing the database. Concurrency control mechanisms ensure that data remains consistent when multiple users modify it simultaneously.
+9. Security: RDBMS systems offer robust security features, including user authentication, authorization, and data encryption. Access to data is controlled based on user roles and permissions.
+10. Backup and Recovery: Regular backups and recovery mechanisms are available to protect against data loss and system failures.
+11. Transaction Management: RDBMS systems provide transaction management capabilities, allowing a series of database operations to be treated as a single unit of work.
+12. Scalability: While RDBMS systems are traditionally vertically scalable (scaling up by adding more resources to a single server), some modern RDBMS implementations offer horizontal scalability as well.
+13. Examples: Popular RDBMS systems include MySQL, PostgreSQL, Oracle Database, Microsoft SQL Server, IBM Db2, and SQLite.
+
+RDBMS systems are widely used in various industries and applications, including finance, healthcare, e-commerce, and content management systems. They are particularly well-suited for scenarios where data relationships and integrity are critical. However, the choice of an RDBMS or another type of database depends on the specific requirements of a project and its data model.
+
+
+
+---
+NOSQL
+NoSQL, or "Not Only SQL," is a term used to describe a category of database management systems (DBMS) that do not strictly adhere to the traditional relational database model (RDBMS). NoSQL databases are designed to handle various types of unstructured, semi-structured, or structured data, making them a flexible choice for modern applications with diverse data requirements. Here are some key characteristics and features of NoSQL databases:
+1. Flexible Data Models:
+   - NoSQL databases are schema-less or schema-flexible, meaning they do not require a predefined schema for data storage. This flexibility allows developers to store data in a way that best suits their application's needs.
+2. Data Types:
+   - NoSQL databases can handle a wide range of data types, including text, JSON, XML, binary data, time-series data, and more.
+3. Scalability:
+   - NoSQL databases are typically designed to scale horizontally, making it easier to accommodate high volumes of data and traffic. Many NoSQL databases can distribute data across multiple servers or nodes.
+4. High Performance:
+   - NoSQL databases are often optimized for specific use cases, such as read-heavy or write-heavy workloads. Some NoSQL databases, like key-value stores and column-family stores, offer high read and write throughput.
+5. Replication and Redundancy:
+   - Many NoSQL databases provide built-in replication and fault-tolerance features to ensure data availability, even in the event of hardware failures.
+6. No Single Query Language:
+   - Unlike SQL, which is a standardized query language for relational databases, NoSQL databases do not adhere to a single query language. Instead, they may offer their own query languages or APIs tailored to their data models.
+7. Data Distribution:
+   - NoSQL databases often distribute data across multiple nodes or servers to enable load balancing and fault tolerance. Data distribution strategies vary among NoSQL databases.
+8. Use Cases:
+   - NoSQL databases are well-suited for a variety of use cases, including real-time analytics, content management systems, IoT (Internet of Things) applications, gaming, social media, and more.
+
+Common Types of NoSQL Databases:
+1. Document Stores:
+   - Examples: MongoDB, Couchbase, Firestore
+   - Store data in flexible, semi-structured documents (e.g., JSON or BSON). Documents can vary in structure within the same collection.
+2. Key-Value Stores:
+   - Examples: Redis, Amazon DynamoDB
+   - Store data as key-value pairs, where each key is associated with a value. These databases are known for their high-speed data access.
+3. Column-Family Stores:
+   - Examples: Apache Cassandra, HBase
+   - Store data in columns rather than rows, which is efficient for write-heavy and high-availability applications.
+4. Graph Databases:
+   - Examples: Neo4j, Amazon Neptune
+   - Designed for managing data with complex relationships, making them suitable for applications like social networks and recommendation engines.
+5. Time-Series Databases:
+   - Examples: InfluxDB, OpenTSDB
+   - Optimized for handling time-stamped data, such as sensor readings, log data, and financial market data.
+
+NoSQL databases are chosen based on specific project requirements, data modeling needs, and scalability demands. The choice between NoSQL and traditional SQL databases depends on factors like data structure, query complexity, and scalability goals. In some cases, a hybrid approach may involve using both SQL and NoSQL databases in the same application to handle different types of data.
+
+
+--------
+object querying
+query - question
+querying - questioning
+"Object querying" typically refers to the process of searching and retrieving data from a collection of objects or structured data using queries or filters. This concept is often associated with databases, APIs, or data manipulation in programming. Object querying allows you to specify criteria for selecting specific objects or records from a larger dataset.
+
+Here are some common scenarios where object querying is used:
+1. Database Queries: In database systems (both SQL and NoSQL), you can use queries to retrieve specific records that meet certain conditions. For example, in SQL, you might use the `SELECT` statement with a `WHERE` clause to query a relational database. In NoSQL databases, you can use query languages or methods to filter data based on criteria.
+   Example (SQL):
+   ```sql
+   SELECT * FROM customers WHERE age > 30;
+   ```
+   Example (MongoDB - NoSQL):
+   ```javascript
+   db.customers.find({ age: { $gt: 30 } });
+   ```
+2. API Data Retrieval: When working with web APIs, you can use query parameters to request specific data from a larger dataset. For example, when querying a RESTful API, you might include query parameters in the URL to filter results.
+   Example (HTTP GET request with query parameters):
+   ```
+   GET /api/products?category=electronics&price_range=100-500
+   ```
+3. JavaScript Array Filtering: In JavaScript, you can use array methods like `filter()` to query objects within an array based on specific conditions.
+   Example (JavaScript array filtering):
+   ```javascript
+   const products = [
+     { id: 1, name: 'Laptop', price: 800 },
+     { id: 2, name: 'Smartphone', price: 500 },
+     { id: 3, name: 'Tablet', price: 300 },
+   ];
+   const affordableProducts = products.filter(product => product.price <= 500);
+   ```
+4. Data Manipulation in Programming: When working with structured data in programming languages, you can create custom queries or filters to extract and manipulate data as needed. This is often done using loops, conditional statements, and other programming constructs.
+   Example (Python list comprehension):
+   ```python
+   products = [
+       {'id': 1, 'name': 'Laptop', 'price': 800},
+       {'id': 2, 'name': 'Smartphone', 'price': 500},
+       {'id': 3, 'name': 'Tablet', 'price': 300}
+   ]
+   affordable_products = [product for product in products if product['price'] <= 500]
+   ```
+5. Database Object-Relational Mapping (ORM): In application development, ORM libraries often provide query methods and DSLs (Domain-Specific Languages) for querying and manipulating database objects as if they were native language objects.
+   Example (using SQLAlchemy in Python):
+   ```python
+   from sqlalchemy.orm import sessionmaker
+   from models import Product  # Assuming a Product model exists
+   Session = sessionmaker(bind=engine)
+   session = Session()
+   affordable_products = session.query(Product).filter(Product.price <= 500).all()
+   ```
+Object querying is a versatile and essential technique for working with data in various contexts, and the specific methods and languages used may vary depending on the technology stack and data source being used.
+
+
+-----
+ORM, which stands for "Object-Relational Mapping," is a programming technique and tool that allows developers to work with relational databases using object-oriented programming (OOP) concepts. It bridges the gap between the object-oriented world of code and the relational world of databases. With ORM, database records are represented as objects in code, making it easier to interact with and manipulate database data using programming languages.
+
+Here are some key aspects and benefits of ORM:
+1. Object-Oriented Data Modeling: ORM allows developers to represent database tables as classes and database rows as objects. This provides a more natural and intuitive way to work with data in code.
+2. Abstraction of SQL: ORM libraries abstract the underlying SQL queries required to interact with the database. Developers can perform CRUD (Create, Read, Update, Delete) operations on objects without writing raw SQL queries.
+3. Database Agnosticism: ORM can work with various relational database management systems (RDBMS) without requiring significant changes to the application code. This flexibility allows developers to switch databases easily.
+4. Data Validation and Type Conversion: ORM libraries often include features for data validation and type conversion, ensuring that data entered into the database is valid and properly formatted.
+5. Query Building: ORM libraries provide query building capabilities that allow developers to construct complex database queries using high-level APIs, often resembling the structure of the host programming language.
+6. Automatic Table Creation and Migration: Some ORM frameworks can automatically create database tables based on class definitions and handle schema migrations as the application evolves.
+7. Caching and Performance Optimization: ORM libraries may include caching mechanisms to improve query performance by reducing the number of database queries.
+8. Relationship Mapping: ORM allows developers to define and manage relationships between objects and tables, such as one-to-many, many-to-one, and many-to-many relationships.
+9. Security: ORM can help mitigate SQL injection attacks by automatically escaping user inputs and parameterizing queries.
+
+Popular ORM Frameworks and Libraries:
+1. Hibernate (Java): A widely used ORM framework for Java applications, particularly in the Java EE ecosystem.
+2. Entity Framework (.NET): A popular ORM framework for .NET applications, enabling developers to work with databases using C# or VB.NET.
+3. Django ORM (Python): Part of the Django web framework, Django ORM simplifies database access for Python developers.
+4. Rails Active Record (Ruby): Part of the Ruby on Rails framework, Active Record is an ORM library that integrates seamlessly with Ruby.
+5. SQLAlchemy (Python): A versatile and widely used ORM library for Python that offers both high-level and low-level database access.
+6. Doctrine (PHP): A PHP ORM library used in conjunction with Symfony and other PHP frameworks.
+7. Eloquent (PHP): Part of the Laravel PHP framework, Eloquent provides an elegant and expressive way to work with databases in PHP.
+
+ORM is a valuable tool for simplifying database interactions, improving code maintainability, and reducing the need for writing low-level SQL queries. However, it's important to note that while ORM can provide many benefits, it may not be suitable for all types of projects or databases, particularly when dealing with complex queries or performance-critical applications. In such cases, a combination of ORM and custom SQL queries may be necessary.
+
+
+-----
+Data Modeling
+representation of data structure and its relation with the system or organization
+Data modeling is the process of creating a structured representation of data and its relationships within a system or organization. It involves defining the structure, constraints, and rules that govern how data is stored, accessed, and manipulated. Data modeling is a crucial step in database design, software development, and information system planning. It helps ensure data accuracy, consistency, and efficiency. There are several aspects and techniques associated with data modeling:
+1. Conceptual Data Modeling:
+   - At the highest level, conceptual data modeling focuses on capturing the essential business concepts and their relationships without getting into technical details. It often results in a high-level entity-relationship diagram (ERD) or a similar visual representation.
+2. Logical Data Modeling:
+   - Logical data modeling takes the conceptual model and refines it further by defining entities, attributes, relationships, and constraints in a more detailed and database-independent manner. Entity-Relationship Diagrams (ERDs) are commonly used in this phase.
+3. Physical Data Modeling:
+   - Physical data modeling is concerned with the actual implementation of the data model on a specific database management system (DBMS). It involves defining data types, indexing, storage details, and optimizing performance based on the chosen DBMS.
+4. Entity-Relationship Diagram (ERD):
+   - An ERD is a graphical representation used in data modeling to illustrate the entities (tables), attributes (columns), and relationships between entities in a database. Common notations include diamonds for relationships, rectangles for entities, and ovals for attributes.
+5. Normalization:
+   - Normalization is a technique used to reduce data redundancy and improve data integrity in a relational database. It involves organizing data into separate tables to eliminate data duplication and minimize update anomalies.
+6. Data Modeling Tools:
+   - There are various software tools designed specifically for data modeling, such as ERD drawing tools and database design software. These tools assist in creating, visualizing, and managing data models.
+7. Data Dictionary:
+   - A data dictionary is a central repository that stores metadata about data elements, including their names, descriptions, data types, and relationships. It provides a common reference for understanding the data model.
+8. Data Modeling Notations:
+   - Various notations are used for data modeling, including Crow's Foot, Chen, and Barker notations for ERDs. Choosing the right notation depends on the project's requirements and standards.
+9. Business Rules and Constraints:
+   - Data modeling includes defining and documenting business rules and constraints that govern the data. These rules ensure data accuracy and consistency.
+10. Iterative Process:
+    - Data modeling is often an iterative process, where models are refined and updated as the project progresses and requirements evolve.
+
+Data modeling is a critical step in the development of information systems, as it helps bridge the gap between business requirements and database design. It ensures that data is structured and organized in a way that supports the needs of the organization and its applications. Effective data modeling contributes to data quality, performance, and maintainability.
+
+-----
+redundent -> repetative
+integrity -> accurate and consistent -> assurance of, data accuracy and consistency over its entire life-cycle
+
+Aggregation -> Aggregation is a concept in data analysis and database management that involves combining multiple data elements or records into a single summary result
+
+
+------
+Indexing
+maintaining seperate refrence to certain data based on its field
+Indexing is a database optimization technique used to improve the speed and efficiency of data retrieval operations, particularly in large databases. An index is a data structure that provides a quick and efficient way to look up rows in a database table based on the values in one or more columns. Indexing significantly reduces the time it takes to search for specific data and is an essential feature in most database management systems (DBMS). Here are some key aspects of indexing:
+1. Purpose of Indexing:
+   - Indexes are used to speed up the retrieval of data from a database table, especially when searching, sorting, or joining tables. Without indexes, a full table scan would be necessary, which can be slow and resource-intensive for large datasets.
+2. Indexed Columns:
+   - Columns that are frequently used in search conditions, join operations, or sorting are good candidates for indexing. However, not all columns need to be indexed, and adding too many indexes can have a negative impact on insert, update, and delete operations.
+3. Types of Indexes:
+   - There are various types of indexes, depending on the database system and requirements. Common types include:
+     - B-tree Index: Suitable for range queries and equality searches.
+     - Hash Index: Efficient for equality searches but not for range queries.
+     - Bitmap Index: Used for columns with a small number of distinct values, such as boolean fields.
+     - Spatial Index: Designed for spatial data, such as geographic coordinates.
+4. Clustered vs. Non-clustered Indexes:
+   - In some database systems, like Microsoft SQL Server, indexes are categorized as clustered or non-clustered. A clustered index determines the physical order of data in the table, while non-clustered indexes provide a separate structure for faster data access.
+5. Creating and Managing Indexes:
+   - Indexes are created using SQL statements specific to the database system being used. It's essential to carefully plan and create indexes based on the database's query patterns and usage. Indexes should also be periodically maintained to optimize performance.
+6. Index Selectivity:
+   - Index selectivity refers to the uniqueness of values in an indexed column. High selectivity (many unique values) is generally better for indexing because it narrows down the search more quickly.
+7. Query Optimization:
+   - Indexes improve query performance by allowing the database engine to locate the necessary data more efficiently. Query execution plans often involve the use of indexes to speed up data retrieval.
+8. Trade-offs:
+   - While indexes can significantly improve read performance, they have trade-offs. They consume disk space and can slow down write operations (inserts, updates, deletes) because the indexes need to be maintained as data changes.
+9. Indexing Strategies:
+   - Indexing strategies should be based on the specific needs of your application. It's important to consider the types of queries your system will execute and the volume of data when designing an indexing strategy.
+
+In summary, indexing is a crucial database optimization technique that enhances the speed and efficiency of data retrieval operations. Properly designed and maintained indexes can significantly improve the performance of database queries, making them an essential tool in managing and accessing large datasets efficiently.

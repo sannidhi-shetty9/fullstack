@@ -1,0 +1,17 @@
+A search algorithm is a method or process used to locate specific information or data within a collection or dataset. It's a fundamental concept in computer science and is used in a wide range of applications, from searching for a particular item in a list to finding relevant information on the internet.
+
+There are several types of search algorithms, each with its own characteristics and advantages. Here are a few common search algorithms:
+1. Linear Search: In a linear search, each item in the dataset is checked sequentially until the target item is found. This method is simple but can be inefficient for large datasets.
+2. Binary Search: Binary search is used on sorted datasets. It repeatedly divides the search range in half by comparing the middle element with the target value. This approach is more efficient than linear search for larger datasets.
+3. Hashing: Hashing involves converting the search key into a hash value, which is used to index or locate the desired item in a data structure called a hash table. Hashing can provide constant-time search complexity on average if implemented well.
+4. Tree-based Searches: Algorithms like Binary Search Trees (BST), Balanced Binary Search Trees (e.g., AVL trees, Red-Black trees), and B-trees are used to organize and search data efficiently in hierarchical structures.
+5. Graph Search Algorithms: These algorithms are used to traverse graphs and find paths or solutions. Common graph search algorithms include Breadth-First Search (BFS) and Depth-First Search (DFS).
+6. String Search Algorithms: These algorithms are designed to search for occurrences of a pattern within a larger text or string. Examples include the Naive String Search, Knuth-Morris-Pratt (KMP) algorithm, and Boyer-Moore algorithm.
+7. Heuristic Search Algorithms: These algorithms are used in artificial intelligence and optimization problems to find approximate solutions. Examples include A* search, Dijkstra's algorithm, and Genetic Algorithms.
+8. Interpolation Search: Similar to binary search, interpolation search is used on uniformly distributed datasets. It estimates the position of the target item based on its value and the distribution of the data.
+
+The choice of search algorithm depends on various factors such as the size of the dataset, the nature of the data, whether the data is sorted or not, and the efficiency requirements. Different algorithms have different time complexities, and selecting the appropriate algorithm can significantly impact the efficiency of a search operation.
+
+text search:
+. Searching algorithm will search data in alphabetic order.
+. Will give more precedence to upper-case letters.

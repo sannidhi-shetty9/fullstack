@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Html Basics</title>
+  </head>
+  <body>
+    <!-- If you omit the parentheses when adding the callback function to the event handler, it would not execute the function but instead treat it as a plain reference to the function.
+
+So, to ensure that the callback function is called and executed when the event occurs, the parentheses are required to indicate the function invocation. -->
+    <h3 onMouseEnter="(()=>console.log('focused'))()">Html Inputs</h3>
+    <input placeholder="city" value="delhi" size="30" onInput="selectHandler(this.value)" />
+    <h5>button</h5>
+    <input
+      type="button"
+      value="clicked"
+      onClick="selectHandler(this.value)"
+    />
+    <h5>checkbox</h5>
+    <input type="checkbox" />
+    <h5>radio button</h5>
+    <!-- radio button should have a common name -->
+    <input type="radio" name="r1" label="yes" />
+    <input type="radio" name="r1" />
+    <h5>datetime</h5>
+    <input type="datetime-local" />
+    <h5>file</h5>
+    <input type="file" />
+
+    <h4>Select Input</h4>
+    <select id="location" >
+      <option text="Dh" label="DELHI">Delhi</option>
+      <option disabled>Mumbai</option>
+      <option selected>Chennai</option>
+    </select>
+    <span id="selected_value"></span>
+    <h5>textarea</h5>
+    <textarea placeholder="city" rows="5" cols="10" onInput="selectHandler(this.value)">DELHI</textarea>
+    <h5>button tag</h5>
+    <button>click me!</button>
+
+    <script>
+      let selectedValue;
+      let selectInput = document.querySelector("#location");
+      selectInput.addEventListener("change", selectHandler);
+      function selectHandler(val) {
+        console.log("selected", val);
+      }
+    </script>
+  </body>
+</html>

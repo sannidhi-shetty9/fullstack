@@ -1,0 +1,5 @@
+readFile: readFile is a method in the fs module that reads the entire contents of a file into memory as a buffer or a string (if an encoding is specified). It reads the entire file at once and returns the data in one go.
+createReadStream: createReadStream is a method in the fs module that creates a Readable Stream. It reads data from the file in chunks or buffers, allowing you to process the data as it becomes available. It does not load the entire file into memory at once, making it suitable for large files.
+
+writeFile: writeFile is a method in the fs module that writes data to a file in a single operation. It overwrites the entire content of the file if it already exists or creates a new file if it doesn't. You provide the entire content as a buffer or string, and it's written to the file in one go.
+createWriteStream: createWriteStream is a method in the fs module that creates a Writable Stream. It allows you to write data to a file incrementally, in chunks or buffers, rather than writing all the data at once.

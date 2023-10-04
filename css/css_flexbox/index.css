@@ -1,0 +1,75 @@
+:root{
+    font-size: 12px;
+    box-sizing: border-box;
+    /* background: lightblue  url("https://www.gstatic.com/webp/gallery/1.jpg") no-repeat fixed right top;
+    background-size: cover; */
+}
+
+div {
+    border: 1px solid black;
+}
+
+#boxModel {
+    border: 1px solid black;
+    /* width: 100%; */
+    height: 600px;
+    font-size: 20px;
+    padding: 10px;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    /* flex-wrap: wrap; */
+
+
+}
+
+#boxModel div {
+    border: 1px solid red;
+
+}
+
+.boxEl {
+    background-color: lightblue;
+    width: 400px;
+    /* min-width: 200px; */
+    /* width: 100%; */
+
+
+}
+
+#boxEl1 {
+    background-color: lightblue;
+    /* width: 200px; */
+    /* min-width: 200px; */
+    /* order:1; */
+    align-self: flex-start;
+
+}
+
+#boxEl2 {
+    left: 0px;
+    background-color: lightyellow;
+    /* flex-grow: 1; */
+    flex-shrink: 2;
+    order:3;
+
+}
+
+#boxEl3 {
+    background-color: lightpink;
+    /* flex-grow: 2; */
+    order:0;
+
+}
+
+
+
+
+
+
+
+
+
+
+

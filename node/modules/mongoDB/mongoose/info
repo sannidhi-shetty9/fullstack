@@ -1,0 +1,220 @@
+Mongoose is an Object Data Modeling (ODM) library for Node.js and MongoDB. 
+It provides a higher-level, more structured way to interact with MongoDB databases compared to the default MongoDB driver for Node.js. Mongoose simplifies the process of defining data models, schema validation, and performing database operations.
+
+abstracts data in js object
+allows to provide structure/schema for data
+
+Key features and components of Mongoose include:
+1. Schema: Mongoose allows you to define a schema for your data models. A schema specifies the structure of documents in a MongoDB collection, including the fields, data types, validation rules, and default values.
+2. Model: Mongoose models are JavaScript classes compiled from schemas. Models represent specific collections in the MongoDB database and provide a high-level, object-oriented interface for interacting with the data. You can create, read, update, and delete documents using model methods.
+3. Validation: Mongoose supports built-in and custom validation rules for fields in your schema. This helps ensure that data stored in the database adheres to your specified rules and constraints.
+4. Middleware: You can define pre-save and post-save middleware functions that run before or after certain operations, such as saving or updating documents. Middleware allows you to perform additional actions, modify data, or run custom logic before or after database operations.
+5. Query Building: Mongoose provides a powerful query builder that simplifies the process of querying the database. You can use methods like `.find()`, `.findOne()`, and `.where()` to construct complex queries.
+6. Population: Mongoose supports population, which allows you to reference documents in other collections and retrieve them when querying. This is useful for creating relationships between documents.
+7. Middleware and Plugins: Mongoose allows you to attach middleware functions and plugins to your schemas and models, enabling you to add custom functionality and behaviors to your data models.
+8. Connection Management: Mongoose manages the MongoDB connection for you and provides features like connection pooling and automatic reconnection in case of failures.
+
+Overall, Mongoose simplifies the interaction with MongoDB and makes it more developer-friendly by providing a structured way to define, validate, and work with data models. It's widely used in Node.js applications that utilize MongoDB as their data store.
+
+
+schema:
+A schema in Mongoose defines the structure of a document within a MongoDB collection. It specifies the fields or properties that a document can have and the data types and validation rules for each field.
+A schema is essentially a blueprint for the documents that will be stored in a particular MongoDB collection.
+Schemas can define fields with various data types such as String, Number, Boolean, Date, ObjectID, etc.
+You can also define default values, validation rules, and custom methods within a schema.
+
+Model:
+A model in Mongoose is a JavaScript class that is compiled from a schema. It represents a specific MongoDB collection and provides an interface for interacting with the documents in that collection.
+Models are responsible for querying the database, creating, reading, updating, and deleting documents, and enforcing the schema and validation rules defined in the schema.
+You can create instances of a model to work with individual documents and perform CRUD operations on them.
+
+Query building:
+Query building in Mongoose allows you to construct MongoDB queries in a more structured and readable way. Mongoose provides a query builder API that you can use to build complex queries for retrieving documents from MongoDB collections. Here are some common query building techniques in Mongoose:
+1. Basic Querying:
+   - Find All Documents:
+     ```javascript
+     const result = await Model.find();
+     ```
+   - Find Documents with a Condition:
+     ```javascript
+     const result = await Model.find({ key: value });
+     ```
+   - Find a Single Document:
+     ```javascript
+     const result = await Model.findOne({ key: value });
+     ```
+2. Selecting Fields:
+   - You can specify which fields to retrieve using the `select` method:
+     ```javascript
+     const result = await Model.find().select('field1 field2');
+     ```
+3. Sorting Results:
+   - To sort results, use the `sort` method:
+     ```javascript
+     const result = await Model.find().sort({ field: 1 }); // 1 for ascending, -1 for descending
+     ```
+4. Limiting Results:
+   - You can limit the number of results using the `limit` method:
+     ```javascript
+     const result = await Model.find().limit(10);
+     ```
+5. Skipping Documents:
+   - To skip a certain number of documents, use the `skip` method:
+     ```javascript
+     const result = await Model.find().skip(5);
+     ```
+6. Chaining Methods:
+   - You can chain multiple query methods together for more complex queries:
+     ```javascript
+     const result = await Model
+       .find({ age: { $gte: 18 } })
+       .sort({ name: 1 })
+       .select('name age')
+       .limit(10);
+     ```
+7. Logical Operators:
+   - Use logical operators like `$or`, `$and`, and `$not` for complex conditions:
+     ```javascript
+     const result = await Model.find().or([{ key1: value1 }, { key2: value2 }]);
+     ```
+8. Regular Expressions:
+   - You can use regular expressions for pattern matching:
+     ```javascript
+     const result = await Model.find({ name: /^J/ }); // Matches names starting with 'J'
+     ```
+9. Counting Documents:
+   - To count documents that match a query, use the `countDocuments` method:
+     ```javascript
+     const count = await Model.countDocuments({ key: value });
+     ```
+10. Aggregation:
+    - For more complex operations, Mongoose supports MongoDB's aggregation framework:
+      ```javascript
+      const result = await Model.aggregate([
+        { $match: { age: { $gte: 18 } } },
+        { $group: { _id: '$country', total: { $sum: 1 } } },
+        { $sort: { total: -1 } }
+      ]);
+      ```
+
+These are some common query building techniques in Mongoose. Depending on your specific use case, you can use these methods to create queries that retrieve, filter, and manipulate data from your MongoDB collections in a structured and efficient manner.
+
+
+populating:
+In Mongoose, "populating" refers to the process of replacing references to other documents (usually represented by IDs) within a document with the actual documents themselves when querying the database. This is particularly useful when you have relationships between documents in different collections. Mongoose provides a powerful method called `populate()` to achieve this. Let's see how you can use it.
+
+Suppose you have two models: `User` and `Post`, and you want to associate each post with a user who authored it. Here's how you can set up and use `populate()`:
+1. Schema Definitions:
+   ```javascript
+   const mongoose = require('mongoose');
+   const userSchema = new mongoose.Schema({
+     name: String,
+     email: String,
+   });
+   const postSchema = new mongoose.Schema({
+     title: String,
+     content: String,
+     author: {
+       type: mongoose.Schema.Types.ObjectId,
+       ref: 'User', // This refers to the 'User' model
+     },
+   });
+   const User = mongoose.model('User', userSchema);
+   const Post = mongoose.model('Post', postSchema);
+   ```
+
+2. Creating and Associating Data:
+   ```javascript
+   // Create a user
+   const user = new User({
+     name: 'John Doe',
+     email: 'john@example.com',
+   });
+   // Save the user to the database
+   user.save();
+   // Create a post associated with the user
+   const post = new Post({
+     title: 'My First Post',
+     content: 'This is the content of my first post.',
+     author: user._id, // Store the user's ObjectId in the 'author' field
+   });
+   // Save the post to the database
+   post.save();
+   ```
+3. Querying with `populate()`:
+   Now, when you want to fetch a post and also include the user who authored it, you can use the `populate()` method:
+   ```javascript
+   Post.findOne({ title: 'My First Post' })
+     .populate('author') // Populate the 'author' field with the user document
+     .exec((err, post) => {
+       if (err) {
+         console.error(err);
+         return;
+       }
+       console.log('Post:', post.title);
+       console.log('Author:', post.author.name);
+     });
+   ```
+   In this example, the `populate('author')` method fetches the `User` document associated with the `author` field in the `Post` document. After executing the query, you can access the user's data directly as `post.author`.
+
+Using `populate()` allows you to simplify the retrieval of related documents, making it easier to work with relationships between collections in MongoDB and Mongoose.
+
+
+
+
+-------------
+validation:
+Mongoose provides robust validation capabilities to ensure that data stored in MongoDB meets specific requirements and constraints defined in your schema. You can specify validation rules for each field in your schema to prevent invalid data from being saved to the database. Here's how to perform validation in Mongoose:
+1. Schema Validation Rules:
+   You can define validation rules within the schema definition using the `validate` property or individual field options. Here's an example of schema validation for a "User" model:
+   ```javascript
+   const mongoose = require('mongoose');
+   const userSchema = new mongoose.Schema({
+     name: {
+       type: String,
+       required: true,
+       minlength: 2,
+       maxlength: 50,
+     },
+     email: {
+       type: String,
+       required: true,
+       unique: true,
+       validate: {
+         validator: (value) => {
+           return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(value);
+         },
+         message: 'Invalid email address',
+       },
+     },
+     age: {
+       type: Number,
+       min: 18,
+     },
+   });
+   const User = mongoose.model('User', userSchema);
+   ```
+   In this example, we have defined validation rules for the "name," "email," and "age" fields. For instance, "name" must be a string with a length between 2 and 50 characters, "email" must be a valid email address, and "age" must be at least 18.
+2. Document Validation:
+   When you create or update a document using Mongoose, it will automatically validate the data against the rules specified in the schema. If the data doesn't meet the validation criteria, Mongoose will throw a validation error.
+   ```javascript
+   const newUser = new User({
+     name: 'John',
+     email: 'invalid-email', // Invalid email format
+     age: 16, // Age less than 18
+   });
+   newUser.save((err) => {
+     if (err) {
+       console.error('Validation Error:', err.message);
+     } else {
+       console.log('User saved successfully');
+     }
+   });
+   ```
+3. Custom Validators:
+   You can define custom validation functions within the schema to perform specific checks. In the above schema, we used a custom validator for the "email" field to ensure it matches a specific pattern.
+4. Error Handling:
+   When a validation error occurs, Mongoose will generate an error object with detailed information about the validation failure. You can access this information through the `err` object and handle it appropriately in your code.
+
+Validation in Mongoose helps maintain data integrity and ensures that your MongoDB database contains consistent and valid data. It's an important part of building robust and reliable applications using Mongoose and MongoDB.
+

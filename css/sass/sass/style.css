@@ -1,0 +1,27 @@
+.button, .submit-button {
+  background-color: #3498db;
+}
+
+.nav ul {
+  list-style: none;
+}
+.nav li {
+  padding: 5px;
+}
+
+.button, .submit-button {
+  border-radius: 5px;
+}
+
+.element {
+  padding: 20px;
+}
+
+.button, .submit-button {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.submit-button {
+  background-color: #3498db;
+}/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HTML JS</title>
+  </head>
+  <body>
+    <script>
+      // root element
+      // const rootElement = document.documentElement;
+
+      // Paste the JavaScript code here
+      // ...
+
+      // Create the HTML elements
+      const html = document.createElement("html"); //<html></html>
+      const head = document.createElement("head"); //<head></head>
+      const body = document.createElement("body"); //<body></body>
+
+      // Rest of the JavaScript code...
+      // Create the head elements
+      const title = document.createElement("title");
+      title.textContent = "My Page";
+      // <title>My Page</title>
+
+      // Append the title to the head
+      head.appendChild(title);
+      // <head><title>My Page</title><head>
+
+
+      // Create the body elements
+      const heading = document.createElement("h1"); 
+      heading.textContent = "Hello, World!";
+      //<h1>Hello, World!</h1>
+
+      const paragraph = document.createElement("p");
+      paragraph.textContent =
+        "This is a dynamically created HTML page using JavaScript.";
+      // <p>This is a dynamically created HTML page using JavaScript.</p>
+
+      // Append the heading and paragraph to the body
+      body.appendChild(heading);
+      body.appendChild(paragraph);
+      // <body><h1>Hello, World!</h1><p>This is a dynamically created HTML page using JavaScript.</p></body>
+
+      // Append the head and body to the HTML
+      html.appendChild(head);
+      html.appendChild(body);
+      // <html> <head><title>My Page</title><head> <body><h1>Hello, World!</h1><p>This is a dynamically created HTML page using JavaScript.</p></body></html>
+
+      // Set the created HTML as the content of the document
+      document.documentElement.replaceWith(html);
+    </script>
+  </body>
+</html>

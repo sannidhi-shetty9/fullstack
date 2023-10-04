@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS input output</title>
+    <style>
+      .cnt1 {
+        border: 1px solid black;
+        margin: 5px;
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>Js input output</div>
+    <script>
+        let cnt = 0;
+      document.write("document 2");
+      let onClickHandler = () => {
+        console.log('button clicked')
+        var in1 = window.prompt();
+        var el1 = document.getElementById("el1");
+        el1.innerHTML = `button clicked ${++cnt} - ${in1}`;
+        // document.write("button clicked!")
+      }
+    </script>
+    <div class="cnt1" id="el1" style="border: 1px solid black">
+      good morning
+    </div>
+    <div class="cnt1" id="el2" style="border: 1px solid black">hi</div>
+
+    <button onClick="onClickHandler()">click me!</button>
+    <button onClick="onClickHandler()" class="btnElem">button 2!</button>
+
+    <script>
+        var btn2 = document.querySelector(".btnElem");
+        btn2.onClickHandler =() => {
+            console.log('clicked button 2!');
+            var res = window.confirm("do you want to continue?");
+            console.log(`confirm: ${res}`)
+        }
+
+    </script>
+
+    <script>
+      // let x = 10;
+      // console.log('console output!', x);
+      // var el1 = document.getElementById("el1");
+      // console.log(el1.innerHTML)
+      // window.alert("el1 content is: " + el1.innerHTML)
+      // el1.innerHTML = "hello";
+
+      document.write("new document!");
+    </script>
+  </body>
+</html>

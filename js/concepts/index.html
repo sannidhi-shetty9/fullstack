@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Html concepts</title>
+    </head>
+    <body>
+        <h5>Normal input</h5>
+        <input id="input">
+        <div id="text"></div>
+        <script>
+            const input = document.querySelector("#input");
+            const text = document.querySelector("#text");
+            const disp =  (event) =>{
+                const value = event.target.value;
+                text.innerHTML = value;
+                console.log(value);
+            }
+            input.addEventListener("input",disp)
+        </script>
+
+<h5>Debounce</h5>
+<input id="debounce_input">
+<div id="debounce_text"></div>
+<script>
+
+    const debounce = (func, delay) => {
+        let timerId;
+        return (...args)=> {
+            clearTimeout(timerId);
+            timerId = setTimeout(()=>{
+                func.apply(this, args)
+            }, delay)
+        }
+    }
+
+    const debounceInput = document.querySelector("#debounce_input");
+    const debounceText = document.querySelector("#debounce_text");
+    const debounceDisp =  (event) =>{
+        const value = event.target.value;
+        debounceText.innerHTML = value;
+        console.log(value);
+    }
+    debounceInput.addEventListener("input",debounce(debounceDisp, 1000))
+</script>
+
+<h5>throttle</h5>
+<input id="throttle_input">
+<div id="throttle_text"></div>
+<script>
+
+    const throttle = (func, delay) => {
+        let inThrottle = false;
+        return (...args)=> {
+            if(inThrottle) return;
+            inThrottle = true;
+            func.apply(this, args)
+            setTimeout(()=>{
+                inThrottle = false;
+            }, delay)
+        }
+    }
+
+    const throttleInput = document.querySelector("#throttle_input");
+    const throttleText = document.querySelector("#throttle_text");
+    const throttleDisp =  (event) =>{
+        const value = event.target.value;
+        throttleText.innerHTML = value;
+        console.log(value);
+    }
+    throttleInput.addEventListener("input",throttle(throttleDisp, 1000))
+</script>
+    </body>
+</html>

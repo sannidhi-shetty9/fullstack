@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS Dom</title>
+  </head>
+  <body>
+    <h4 class="heading4">HTML DOM Manipulation</h4>
+    <button id="btn1">change heading</button>
+    <br><br>
+    <div>
+      <input id="input1" placeholder="city" onchange="handleInput(event)" />
+      <h5 id="value"></h5>
+      <ul></ul>
+    </div>
+
+    <script>
+        let cnt = 0;
+      const h4List = document.getElementsByClassName("heading4");
+      const h4 = h4List[0];
+      const btn1 = document.querySelector("#btn1");
+      const cityList = document.querySelector("div ul"); // combinators
+      console.log(`${h4List}, h4:${h4.textContent}, citylist: ${cityList}`);
+
+      btn1.addEventListener("click", (e) => {
+        console.log(`button clicked: ${e.target.style}`);
+        e.target.style.backgroundColor = "red";
+        e.target.innerText = "Clicked!";
+        // e.target.style.color = "red";
+        h4.innerText = `button clicked ${++cnt} times`;
+        h4.style.color = "red";
+        console.log('button clicked: ', cnt)
+      });
+
+      function handleInput(event) {
+        console.log("input: ", event, event.target.value);
+        // const cityListElements = Array.from(cityList.children)
+        // console.log(cityListElements, typeof(cityListElements))
+        // cityListElements.forEach((element,id) => {
+        //     element.style.color = "black";
+        // });
+        const listElem = document.createElement("li"); //<li></li>
+        listElem.innerHTML = event.target.value; // <li>value</li>
+        listElem.style.cursor = "pointer";
+        listElem.addEventListener("click", (e) => {
+          e.target.remove();
+        });
+        cityList.appendChild(listElem);
+        cityList.style.color = "black";
+        cityList.lastElementChild.style.color = "red";
+        cityList.lastElementChild.previousElementSibling &&
+          (cityList.lastElementChild.previousElementSibling.style.color =
+            "black");
+        event.target.value = "";
+      }
+    </script>
+  </body>
+</html>
+
+
+<!-- A CSS selector can contain more than one simple selector. Between the simple selectors, we can include a combinator.
+
+There are four different combinators in CSS:
+
+descendant selector (space)
+child selector (>)
+adjacent sibling selector (+)
+general sibling selector (~) -->
