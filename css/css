@@ -1,0 +1,213 @@
+CSS: 
+
+CSS stands for Cascading Style Sheets 
+
+CSS describes how HTML elements are to be displayed on screen, paper, or in other media 
+
+CSS is used to define styles for your web pages, including the design, layout and variations in display for different devices and screen sizes. 
+
+ 
+
+CSS Selector: 
+
+Syntax: 
+
+Selector {property: value; property: value;} 
+
+ 
+
+CSS selectors are used to "find" (or select) the HTML elements you want to style. 
+
+We can divide CSS selectors into five categories: 
+
+Simple selectors (select elements based on name, id, class) 
+
+Combinator selectors (select elements based on a specific relationship between them) 
+
+Pseudo-class selectors (select elements based on a certain state) 
+
+Pseudo-elements selectors (select and style a part of an element) 
+
+Attribute selectors (select elements based on an attribute or attribute value) 
+
+ 
+
+Element Selector: elementName 
+
+element { 
+
+} 
+
+ 
+
+p { 
+  text-align: center; 
+  color: red; 
+} 
+
+ 
+
+Id Selector:  #idName 
+
+#id { 
+
+} 
+
+#para1 { 
+  text-align: center; 
+  color: red; 
+} 
+
+Class Selector: #classname 
+
+.class { 
+
+} 
+
+.center { 
+  text-align: center; 
+  color: red; 
+} 
+
+ 
+
+Universal Selector: * 
+
+ 
+
+Grouping Selector:  
+
+h1, h2, p { 
+  text-align: center; 
+  color: red; 
+} 
+
+ 
+
+Selector 
+
+Example 
+
+Example description 
+
+#id 
+
+#firstname 
+
+Selects the element with id="firstname" 
+
+.class 
+
+.intro 
+
+Selects all elements with class="intro" 
+
+element.class 
+
+p.intro 
+
+Selects only <p> elements with class="intro" 
+
+* 
+
+* 
+
+Selects all elements 
+
+element 
+
+p 
+
+Selects all <p> elements 
+
+element,element,.. 
+
+div, p 
+
+Selects all <div> elements and all <p> elements 
+
+ 
+
+Inserting CSS: 
+
+External Css: 
+
+<!DOCTYPE html> 
+<html> 
+<head> 
+<link rel="stylesheet" href="mystyle.css"> 
+</head> 
+<body> 
+ 
+<h1>This is a heading</h1> 
+<p>This is a paragraph.</p> 
+ 
+</body> 
+</html> 
+
+ 
+
+MyStyles.css file 
+
+body { 
+  background-color: lightblue; 
+} 
+ 
+h1 { 
+  color: navy; 
+  margin-left: 20px; 
+} 
+
+ 
+
+Internal CSS: 
+
+<!DOCTYPE html> 
+<html> 
+<head> 
+<style> 
+body { 
+  background-color: linen; 
+} 
+ 
+h1 { 
+  color: maroon; 
+  margin-left: 40px; 
+} 
+</style> 
+</head> 
+<body> 
+ 
+<h1>This is a heading</h1> 
+<p>This is a paragraph.</p> 
+ 
+</body> 
+</html> 
+
+ 
+
+ 
+
+Inline CSS: 
+
+<!DOCTYPE html> 
+<html> 
+<body> 
+ 
+<h1 style="color:blue;text-align:center;">This is a heading</h1> 
+<p style="color:red;">This is a paragraph.</p> 
+ 
+</body> 
+</html> 
+
+- 
+
+Flex box:  
+
+Main axis -> justify-content 
+
+Vertical axis -> Align-items 
+
+ 
+
+-------------------- 

@@ -284,8 +284,241 @@ In summary, JSX is a declarative way to describe the structure and appearance of
 
 
 
+--------------
+CLASS COMPONENT
+Class components were a fundamental part of React before the introduction of functional components and hooks. They are still used in many existing React applications, so understanding how they work is important.
+Here's how a class component works in React:
+1. Class Definition: You define a class that extends `React.Component`. This class serves as your component.
+   ```javascript
+   class MyComponent extends React.Component {
+     // Component code here
+   }
+   ```
+2. Constructor: You can define a constructor to initialize the component's state and bind event handlers.
+   ```javascript
+   constructor(props) {
+     super(props);
+     this.state = {
+       // Initial state properties
+     };
+     this.handleClick = this.handleClick.bind(this);
+   }
+   ```
+3. Render Method: The core of the component is the `render` method. This method returns the JSX (React elements) that should be rendered to the DOM. The `render` method is called whenever the component needs to be updated.
+   ```javascript
+   render() {
+     return (
+       <div>
+         {/* JSX elements */}
+       </div>
+     );
+   }
+   ```
+4. State: You can manage component state using the `this.state` object. When the state is updated using `this.setState()`, React schedules a re-render, and the `render` method is called again with the updated state.
+   ```javascript
+   this.setState({ count: this.state.count + 1 });
+   ```
+5. Props: You can access props passed to the component using `this.props`. Props are immutable and can't be changed by the component itself.
+   ```javascript
+   <MyComponent prop1="value1" prop2="value2" />
+   ```
+6. Lifecycle Methods: Class components have a set of lifecycle methods that allow you to perform actions at various stages of a component's life, such as `componentDidMount`, `componentDidUpdate`, and `componentWillUnmount`. These methods are useful for side effects like data fetching, subscriptions, and cleanup.
+   ```javascript
+   componentDidMount() {
+     // Perform setup here
+   }
+   ```
+7. Event Handling: You can define event handlers within the class. However, if you need to access `this` within the event handler, you typically need to bind the handler in the constructor.
+   ```javascript
+   handleClick() {
+     // Handle the event
+   }
+   ```
+8. Component Lifecycle: React controls the lifecycle of the component. It calls the lifecycle methods in a specific order (e.g., `componentDidMount` is called after the initial render), and you can hook into these methods to manage your component's behavior.
+   ```javascript
+   componentDidMount() {
+     // Component has been mounted, perform actions
+   }
+   ```
+9. Updating: When the component's state or props change, React re-renders the component, and the `render` method is called again with the updated data.
+10. Unmounting: When a class component is removed from the DOM, the `componentWillUnmount` lifecycle method is called, allowing you to perform cleanup.
+Here's a simplified example of a class component:
+```javascript
+import React, { Component } from 'react';
+class MyComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0,
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+  componentDidMount() {
+    // Component has been mounted, perform setup
+  }
+  handleClick() {
+    this.setState({ count: this.state.count + 1 });
+  }
+  render() {
+    return (
+      <div>
+        <p>Count: {this.state.count}</p>
+        <button onClick={this.handleClick}>Increment</button>
+      </div>
+    );
+  }
+}
+export default MyComponent;
+```
+This class component maintains state, handles events, and provides a rendering function for creating the user interface. React takes care of managing the component's lifecycle and updating the DOM when necessary.
+
+------
+By calling super(props) in the constructor, you ensure that React's component class is properly initialized, and you have access to this.props throughout your class component. 
+
+
+------
+In React, class components are used as the building blocks for creating user interface elements. When a class component is used in a React application, the following process occurs:
+1. Instance Creation: When you use a class component in your application by rendering it in your JSX code (e.g., `<MyComponent />`), React creates an instance of the class component. This instance represents a single occurrence of that component and is often referred to as the component's "instance."
+2. Constructor Initialization: If the class component has a constructor, it is called during the instance creation. This is where you typically initialize the component's state and set up initial values. You might also perform one-time setup tasks like binding event handlers.
+   ```javascript
+   constructor(props) {
+     super(props);
+     this.state = {
+       count: 0,
+     };
+     this.handleClick = this.handleClick.bind(this);
+   }
+   ```
+3. Initial Render: The `render` method of the class component is called, and it returns the JSX (React elements) that describe the component's UI. The returned JSX is used to build a virtual representation of the component's UI.
+   ```javascript
+   render() {
+     return (
+       <div>
+         <p>Count: {this.state.count}</p>
+         <button onClick={this.handleClick}>Increment</button>
+       </div>
+     );
+   }
+   ```
+4. DOM Creation: The virtual representation created by the `render` method is used to create and update the actual DOM in the browser. React efficiently calculates the differences between the new virtual representation and the previous one, minimizing the number of changes to the DOM.
+5. Event Handling: Event handlers, like `this.handleClick`, are registered with the DOM elements. When events (e.g., clicks) occur, React invokes these event handlers to handle user interactions.
+6. State Updates: If a component's state changes, it triggers a re-render of the component. Calling `this.setState()` causes React to schedule a re-render, and the `render` method is called again with the updated state.
+   ```javascript
+   handleClick() {
+     this.setState({ count: this.state.count + 1 });
+   }
+   ```
+7. Subsequent Renders: During re-renders, React calls the `render` method to create a new virtual representation of the UI based on the updated state or props. React then calculates the differences between the new virtual representation and the previous one and applies these differences to the DOM, updating the user interface.
+8. Lifecycle Methods: Class components have a set of lifecycle methods (e.g., `componentDidMount`, `componentDidUpdate`, `componentWillUnmount`) that you can use to hook into various stages of the component's life cycle. For example, you can use `componentDidMount` to perform setup tasks after the initial render, and you can use `componentDidUpdate` for tasks that need to occur after state or props changes.
+   ```javascript
+   componentDidMount() {
+     // Component has been mounted, perform setup
+   }
+   ```
+The instance of a class component represents a specific instance of a user interface element in your application. React manages the lifecycle of this instance, ensuring that it's created, updated, and, if needed, unmounted properly. Class components follow a controlled process of rendering and re-rendering based on state and props changes, resulting in a responsive and interactive user interface.
+
+
+---------
+FUNCTION COMPONENT
+
+Non-JSX (Manually Created React Elements):
+```javascript
+import React from 'react';
+import ReactDOM from 'react-dom';
+// Define a function component without JSX
+function Greeting(props) {
+  // Define style attributes as a JavaScript object
+  const headingStyle = {
+    color: 'blue',
+    fontSize: '24px',
+  };
+  // Create a heading element with style
+  const heading = React.createElement('h1', { style: headingStyle }, `Hello, ${props.name}!`);
+
+  // Define style attributes for a div
+  const divStyle = {
+    backgroundColor: 'lightgray',
+    padding: '10px',
+  };
+  // Create a div element with style
+  const div = React.createElement('div', { style: divStyle }, heading);
+  // Call another function component without JSX
+  const subGreetingElement = SubGreeting({ name: props.name });
+  // Combine elements to form the component tree
+  return React.createElement('div', null, div, subGreetingElement);
+}
+// Define a separate function component without JSX
+function SubGreeting(props) {
+  // Define style attributes as a JavaScript object
+  const subHeadingStyle = {
+    color: 'green',
+    fontSize: '18px',
+  };
+  // Create a subheading element with style
+  const subHeading = React.createElement('h2', { style: subHeadingStyle }, `Welcome to the world, ${props.name}!`);
+  return subHeading;
+}
+// Create a function to call the function component without JSX
+function createApp() {
+  const greetingElement = Greeting({ name: 'John' });
+  // Render the React element in the actual DOM
+  ReactDOM.render(greetingElement, document.getElementById('root'));
+}
+// Call the function to create and render the component
+createApp();
+```
+- In the `Greeting` component, we define `headingStyle` and `divStyle` as JavaScript objects to represent the styles for the heading and the div elements.
+- We create React elements using `React.createElement` and pass the respective styles as properties (attributes).
+- The `SubGreeting` component follows a similar pattern, defining the `subHeadingStyle` and creating the subheading element.
+- The elements are combined to form the component tree returned by the `Greeting` component.
+- In the `createApp` function, we render the `greetingElement` in the actual DOM using `ReactDOM.render`.
+
+---
+Using JSX:
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+// Define a function component using JSX with attributes including style
+function Greeting(props) {
+  // Define style attributes directly in JSX
+  const headingStyle = {
+    color: 'blue',
+    fontSize: '24px',
+  };
+  return (
+    <div style={{ backgroundColor: 'lightgray', padding: '10px' }}>
+      <h1 style={headingStyle}>Hello, {props.name}!</h1>
+      <SubGreeting name={props.name} />
+    </div>
+  );
+}
+// Define another function component using JSX with style attributes
+function SubGreeting(props) {
+  const subHeadingStyle = {
+    color: 'green',
+    fontSize: '18px',
+  };
+  return <h2 style={subHeadingStyle}>Welcome to the world, {props.name}!</h2>;
+}
+// Create a function to call the function component using JSX
+function createApp() {
+  const greetingElement = <Greeting name="John" />;
+  // Render the React element in the actual DOM
+  ReactDOM.render(greetingElement, document.getElementById('root'));
+}
+// Call the function to create and render the component
+createApp();
+```
+- In the `Greeting` component, we define `headingStyle` and `subHeadingStyle` as JavaScript objects to represent the styles.
+- We use JSX to create React elements directly. The style attributes are applied directly within the JSX tags using the `style` attribute.
+- The `SubGreeting` component follows a similar pattern, creating a subheading element with style attributes.
+- In the `createApp` function, we render the `greetingElement` in the actual DOM using `ReactDOM.render`.
+
+The JSX version is more concise and readable, making it the recommended approach for defining React components and their attributes.
+
 ---------------
-State
+STATE
 In the context of web development, "state" refers to the current condition or data of a system or component at a specific point in time. It represents information that can change over time and affect how a web application behaves and renders its user interface. State is a fundamental concept in front-end development, and it's crucial for building interactive and dynamic web applications.
 In React, a popular JavaScript library for building user interfaces, "state" is a central concept. React components can have state, which allows them to manage and represent data that can change during the lifetime of the component. Here are some key points about state in React:
 1. Component State:
@@ -296,7 +529,6 @@ In React, a popular JavaScript library for building user interfaces, "state" is 
    import React, { useState } from 'react';
    function Counter() {
      const [count, setCount] = useState(0);
-
      return (
        <div>
          <p>Count: {count}</p>
@@ -609,6 +841,221 @@ React Router is a popular library for handling routing and navigation in React a
 React Router is a powerful library for managing navigation and routing in React applications. It simplifies the process of creating SPAs and enables you to create structured and user-friendly navigation experiences within your app.
 
 
+-----
+In React applications, `Link` and `NavLink` are components provided by popular routing libraries like React Router for navigation between different pages or routes in a web application. They are used to create hyperlinks for navigating within the app, and they have some key differences.
+1. Link:
+   - `Link` is a component provided by React Router, the most widely used routing library in the React ecosystem.
+   - It's used to create hyperlinks that navigate to specific routes within the application.
+   - `Link` is a simple component that generates an anchor (`<a>`) tag with the `to` prop, specifying the route to navigate to.
+   Example of `Link` usage:
+   ```jsx
+   import { Link } from 'react-router-dom';
+   // Inside a component's render method
+   <Link to="/about">Go to About</Link>
+   ```
+2. NavLink:
+   - `NavLink` is also provided by React Router and is a more feature-rich version of `Link`.
+   - It's used for navigation like `Link`, but it also allows you to style the active link, providing visual feedback to users about the current route.
+   - `NavLink` has an `activeClassName` or `activeStyle` prop that allows you to define a CSS class or inline styles to be applied when the link is active (i.e., when it points to the current route).
+   Example of `NavLink` usage:
+   ```jsx
+   import { NavLink } from 'react-router-dom';
+   // Inside a component's render method
+   <NavLink to="/about" activeClassName="active-link">Go to About</NavLink>
+   ```
+Key Differences:
+- `Link` is a basic component for navigation, while `NavLink` provides extra features for active link styling.
+- `NavLink` offers `activeClassName` and `activeStyle` props, which allow you to style the active link.
+- You can use `Link` for simple navigation where active link styling isn't necessary, and you can use `NavLink` when you want to style the active link differently.
+In both cases, the `to` prop specifies the route to navigate to. These components are typically used within a router context (provided by React Router) and should be placed inside a `BrowserRouter`, `HashRouter`, or other router component to work properly.
+
+
+------
+In React, `useHistory` is a hook provided by the React Router library, which is commonly used for client-side navigation in single-page applications. It allows you to programmatically navigate to different routes or URLs within your application. `useHistory` provides access to the history object, which contains a variety of methods for managing navigation and history states.
+Here's how you can use `useHistory`:
+1. Import the Hook:
+   First, you need to import the `useHistory` hook from the React Router library.
+   ```jsx
+   import { useHistory } from 'react-router-dom';
+   ```
+2. Use the `useHistory` Hook:
+   You can use the `useHistory` hook within a functional component. It provides access to the history object, which contains methods for programmatic navigation.
+   ```jsx
+   const MyComponent = () => {
+     const history = useHistory();
+     const navigateToAboutPage = () => {
+       history.push('/about'); // Navigate to the '/about' route
+     };
+     return (
+       <div>
+         <button onClick={navigateToAboutPage}>Go to About</button>
+       </div>
+     );
+   };
+   ```
+   In this example:
+   - We import `useHistory` from `react-router-dom`.
+   - Inside the functional component, we call `useHistory()` to get the `history` object.
+   - We can then use the `history.push()` method to navigate to the '/about' route when a button is clicked.
+Common `history` Object Methods:
+- `push(path, [state])`: Pushes a new entry onto the history stack and navigates to the specified route.
+- `replace(path, [state])`: Replaces the current entry on the history stack with the specified route.
+- `go(n)`: Moves backward or forward in the history stack by the specified number of entries.
+- `goBack()`: Equivalent to `go(-1)`, which navigates to the previous page in the history.
+- `goForward()`: Equivalent to `go(1)`, which navigates to the next page in the history.
+- `block(prompt)`: Prevents navigation to a different route and prompts the user with a message if they attempt to leave the current page.
+- `listen(listener)`: Allows you to listen for changes to the history object.
+By using `useHistory`, you can perform client-side navigation in response to user interactions, such as button clicks, form submissions, or any other events in your React application. It's a common tool for building dynamic and interactive single-page applications.
+
+------
+In the context of the `history.push()` and `history.replace()` methods in React Router, the `[state]` parameter is an optional piece of state that you can pass along with the navigation. This state is associated with the route you are navigating to and can be accessed when you reach the target route.
+
+Here's how it works:
+
+1. **`history.push(path, [state])`**:
+   - The `path` parameter is the URL path or route you want to navigate to.
+   - The `[state]` parameter is an optional JavaScript object that you can provide. This state can contain any data or information you want to pass to the target route.
+   - The target route will receive the state as a `location` object via the `location.state` property.
+
+2. **`history.replace(path, [state])`**:
+   - Similar to `push()`, `replace()` is used to navigate to a different route.
+   - The `[state]` parameter, again, is an optional object that you can use to pass data to the target route. This state is accessible via the `location.state` property on the target route.
+
+Here's an example of how to use the `[state]` parameter with `history.push()`:
+
+```jsx
+import { useHistory } from 'react-router-dom';
+
+const MyComponent = () => {
+  const history = useHistory();
+
+  const navigateWithState = () => {
+    const user = { id: 123, name: 'John' };
+    history.push('/user/123', { user }); // Navigate to the user's profile with user data
+  };
+
+  return (
+    <div>
+      <button onClick={navigateWithState}>Go to User Profile</button>
+    </div>
+  );
+};
+```
+
+In this example, when you navigate to the '/user/123' route, the user object will be available in the `location.state` of the target route. You can access it like this:
+
+```jsx
+import { useLocation } from 'react-router-dom';
+
+const UserProfile = () => {
+  const location = useLocation();
+  const user = location.state.user; // Access the user data passed with the state
+  // Render the user's profile using the user data
+};
+```
+
+The ability to pass state between routes is useful for scenarios where you want to carry information from one route to another without relying on global state management.
+
+
+-------
+`useLocation` is a hook provided by the React Router library, which is commonly used for accessing the current location or URL in a React component. It allows you to retrieve information about the current route, including the pathname, search parameters, and hash.
+
+Here's how you can use `useLocation`:
+
+1. **Import the Hook**:
+   First, you need to import the `useLocation` hook from the React Router library.
+
+   ```jsx
+   import { useLocation } from 'react-router-dom';
+   ```
+
+2. **Use the `useLocation` Hook**:
+   You can use the `useLocation` hook within a functional component to access the current location object.
+
+   ```jsx
+   import { useLocation } from 'react-router-dom';
+
+   const MyComponent = () => {
+     const location = useLocation();
+
+     return (
+       <div>
+         <h1>Current Location: {location.pathname}</h1>
+       </div>
+     );
+   };
+   ```
+
+In this example:
+- We import `useLocation` from `react-router-dom`.
+- Inside the functional component, we call `useLocation()` to get the `location` object.
+- We can access various properties of the `location` object to obtain information about the current route. In this case, we access `location.pathname` to get the pathname of the current route.
+
+Properties of the `location` object include:
+
+- **`pathname`**: A string representing the current route's path.
+- **`search`**: A string representing the query string or search parameters, including the leading '?' character (e.g., `?id=123&name=John`).
+- **`hash`**: A string representing the fragment identifier or hash portion of the URL, including the leading '#' character (e.g., `#section1`).
+- **`state`**: An optional state object that can be passed during navigation using `history.push()` or `history.replace()`.
+
+`useLocation` is particularly useful when you need to access and display the current route's information, such as highlighting the active route in a navigation menu or showing route-specific content based on the URL.
+
+------
+In React Router, `props.match` is a prop provided to components that are rendered by a `<Route>` component. It contains information about how the current URL matches the path specified in the `<Route>` component, including route parameters and other route-related data.
+
+Here's an overview of the properties available within `props.match`:
+
+1. **`match.params`**: An object containing key-value pairs for route parameters. If your route path includes dynamic segments like `:id` or `:username`, the values extracted from the URL will be available in `match.params`.
+
+   For example, if you have a route like this:
+   ```jsx
+   <Route path="/user/:id" component={UserProfile} />
+   ```
+
+   The `match.params` object in the `UserProfile` component will contain the `id` parameter, which corresponds to the part of the URL matched to `:id`.
+
+2. **`match.url`**: A string representing the matched portion of the URL. This can be useful for constructing links and generating URLs based on the current route.
+
+   For example, if the current URL is "/user/123," `match.url` will be "/user/123."
+
+3. **`match.path`**: A string representing the path pattern specified in the `<Route>` component. It's helpful for determining the route pattern that led to the current URL match.
+
+   For the same example route, `match.path` would be "/user/:id."
+
+Here's how you typically access and use `props.match` in a React component:
+
+```jsx
+import { Route } from 'react-router-dom';
+
+const UserProfile = (props) => {
+  // Access match.params to get route parameters
+  const { id } = props.match.params;
+
+  // Access match.url and match.path to work with URLs
+  const { url, path } = props.match;
+
+  return (
+    <div>
+      <h1>User Profile</h1>
+      <p>User ID: {id}</p>
+      <p>Matched URL: {url}</p>
+      <p>Matched Path: {path}</p>
+    </div>
+  );
+};
+
+const App = () => {
+  return (
+    <div>
+      <Route path="/user/:id" component={UserProfile} />
+    </div>
+  );
+};
+```
+
+In this example, the `UserProfile` component receives `props.match` as a prop and extracts the route parameters, URL, and path information. This enables you to create dynamic and data-driven components that respond to different routes and their associated data.
+
+
 ------
 State management
 State management is a crucial aspect of building web applications, particularly in complex and data-driven applications. It involves managing and maintaining the data and the state of your application so that it behaves as expected, is consistent, and provides a smooth user experience. In React applications, state management is often a central concern, and there are various approaches and libraries available to handle it effectively. Here are some common techniques and libraries for state management in React:
@@ -632,7 +1079,7 @@ State management is a crucial aspect of building web applications, particularly 
    ```
 2. Prop Drilling:
    - You can pass data from a parent component to a deeply nested child component by prop drilling. While this is a simple technique, it can become cumbersome in applications with deeply nested components, leading to readability and maintenance issues.
-3. Context API**:
+3. Context API:
    - The Context API in React allows you to share data across the component tree without explicitly passing props. It's useful for sharing global state, such as user authentication or theme settings, with multiple components.
    ```jsx
    // Creating a context
@@ -801,5 +1248,757 @@ React Hooks are a set of functions introduced in React 16.8 that allow you to us
 React Hooks have greatly simplified state management and side effect handling in React applications, making it easier to work with functional components. They allow you to reuse logic across components and create cleaner and more maintainable code. When working with React, understanding and using React Hooks effectively is a valuable skill.
 
 
+------------
+useRef hook:
+The `useRef` hook in React allows you to create and manage a mutable reference that can persist across renders without causing re-renders when the reference changes. It's a powerful tool for working with DOM elements, storing values between renders, and performing side effects without triggering re-renders. Here's how it works:
+1. Creating a Ref:
+   You start by creating a ref using the `useRef` function. The `useRef` function takes an optional initial value and returns an object with a `current` property that holds the reference.
+   ```javascript
+   import React, { useRef } from 'react';
+   function MyComponent() {
+     const myRef = useRef(null); // Initialize with an optional initial value
+     // ...
+   }
+   ```
+2. Attaching a Ref to a DOM Element:
+   You can attach the `myRef` to a JSX element using the `ref` attribute. This allows you to reference and manipulate the corresponding DOM element.
+   ```javascript
+   function MyComponent() {
+     const myRef = useRef(null);
+     return <input ref={myRef} />;
+   }
+   ```
+3. Accessing the DOM Element:
+   You can access the DOM element associated with the ref using `myRef.current`. This reference allows you to interact with the DOM element directly, for example, to set focus, trigger events, or measure dimensions.
+   ```javascript
+   function MyComponent() {
+     const myRef = useRef(null);
+     function focusInput() {
+       myRef.current.focus(); // Set focus on the input element
+     }
+     return (
+       <div>
+         <input ref={myRef} />
+         <button onClick={focusInput}>Focus Input</button>
+       </div>
+     );
+   }
+   ```
+4. Persisting Values Across Renders:
+   Unlike state variables, changes to the `current` property of a `useRef` object do not trigger component re-renders. This makes `useRef` suitable for storing values that don't need to be part of the component's state but need to persist across renders.
+   ```javascript
+   function Counter() {
+     const countRef = useRef(0);
+     function increment() {
+       countRef.current += 1; // Value persists across renders
+     }
+     return (
+       <div>
+         <p>Count: {countRef.current}</p>
+         <button onClick={increment}>Increment</button>
+       </div>
+     );
+   }
+   ```
+5. Common Use Cases:
+   - Managing focus: You can use `useRef` to manage focus on DOM elements when certain conditions are met.
+   - Storing previous values: `useRef` is useful for storing previous values in `useEffect` to perform comparisons.
+   - Accessing DOM elements: You can interact with DOM elements directly, such as triggering animations or measuring dimensions.
+   - Preserving values without re-renders: When you need to store values that shouldn't cause re-renders, `useRef` is a suitable choice.
+
+The `useRef` hook simplifies working with mutable references and is a valuable tool for various scenarios in React applications. It's important to note that changes to the `current` property of a `useRef` object do not trigger re-renders, making it ideal for managing non-reactive state or interacting with the DOM.
+
+
+-----------
+In class components, the equivalent of the `useRef` hook is the use of class instance properties to create a ref-like object. You can create a property on the class instance and assign it a DOM element or any mutable value you want to reference. Here's how you can achieve this:
+1. Creating a Ref in a Class Component:
+   To create a ref-like object in a class component, define a property on the class and initialize it with `null`. You can use this property to reference a DOM element or any other mutable value.
+   ```javascript
+   import React, { Component } from 'react';
+   class MyComponent extends Component {
+     constructor(props) {
+       super(props);
+       // Create a ref-like property and initialize it with null
+       this.myRef = null;
+     }
+     // ...
+     render() {
+       return (
+         <div>
+           {/* Use this.myRef to reference the element */}
+           <input ref={(element) => (this.myRef = element)} />
+           <button onClick={() => this.focusInput()}>Focus Input</button>
+         </div>
+       );
+     }
+   }
+   export default MyComponent;
+   ```
+2. Accessing the Ref:
+   In the example above, we've created a ref-like property called `myRef` in the class. We set it to `null` initially. Then, in the `render` method, we use the `ref` attribute to assign a reference to an input element. This allows us to access the DOM element through `this.myRef`.
+3. Using the Ref:
+   You can use the ref-like property, `this.myRef`, to access and manipulate the DOM element or value. For example, you can focus the input element like this:
+   ```javascript
+   focusInput() {
+     if (this.myRef) {
+       this.myRef.focus();
+     }
+   }
+   ```
+This pattern allows you to achieve similar functionality to the `useRef` hook in class components. However, keep in mind that using hooks and functional components is the recommended approach in modern React development, as it often leads to more concise and readable code. If possible, consider using functional components with `useRef` for improved maintainability and readability.
+
+
+-----------
+In React, the `ref` attribute is used to create a reference to a React element or component instance. This reference allows you to interact with the element or component directly, such as accessing its properties or calling its methods. The `ref` attribute can be applied to both DOM elements and custom React components.
+Here's how you can use the `ref` attribute with React elements and components:
+1. Creating a Ref for a DOM Element:
+   To create a ref for a DOM element, you can use the `React.createRef()` method and assign the ref to the `ref` attribute of the element you want to reference.
+   ```javascript
+   import React, { Component } from 'react';
+   class MyComponent extends Component {
+     constructor(props) {
+       super(props);
+
+       // Create a ref for a DOM element
+       this.myInputRef = React.createRef();
+     }
+     focusInput() {
+       // Access and manipulate the DOM element using the ref
+       this.myInputRef.current.focus();
+     }
+     render() {
+       return (
+         <div>
+           {/* Assign the ref to the input element */}
+           <input ref={this.myInputRef} />
+           <button onClick={() => this.focusInput()}>Focus Input</button>
+         </div>
+       );
+     }
+   }
+   ```
+   In this example, `this.myInputRef` is a ref created with `React.createRef()`, and it is assigned to the `ref` attribute of the input element. You can use `this.myInputRef.current` to access the DOM element.
+2. Creating a Ref for a Custom React Component:
+   You can also use the `ref` attribute to create a reference to an instance of a custom React component. This can be helpful when you need to interact with methods or properties of that component instance.
+   ```javascript
+   import React, { Component } from 'react';
+
+   class ChildComponent extends Component {
+     // ...
+   }
+   class ParentComponent extends Component {
+     constructor(props) {
+       super(props);
+       // Create a ref for a custom component instance
+       this.childRef = React.createRef();
+     }
+     componentDidMount() {
+       // Access methods or properties of the ChildComponent instance
+       this.childRef.current.someMethod();
+     }
+     render() {
+       return (
+         <div>
+           {/* Assign the ref to the ChildComponent instance */}
+           <ChildComponent ref={this.childRef} />
+           {/* ... */}
+         </div>
+       );
+     }
+   }
+   ```
+   In this example, `this.childRef` is a ref created with `React.createRef()` and assigned to the `ref` attribute of the `ChildComponent` instance. You can then access methods or properties of the `ChildComponent` instance using `this.childRef.current`.
+The `ref` attribute is a powerful feature that allows you to interact with elements and components in a way that is not typical in React, but it should be used with care. Avoid overusing refs, as one of the primary benefits of React is its declarative and component-based approach. Refs are generally necessary for integration with non-React libraries or for specific use cases where direct access to elements or component instances is required.
+
+-----------
+The `ref` attribute in React accepts both functions and objects (variables or references) for flexibility and compatibility with different use cases and programming patterns. React provides this flexibility to accommodate various scenarios:
+1. Function Callbacks:
+   You can pass a function as the `ref` attribute, and React will call this function with the DOM element when the component is mounted. This is commonly used when you want to perform some action with the DOM element, such as storing it in a variable or interacting with it directly. For example:
+   ```jsx
+   <input ref={(element) => { /* Do something with 'element' */ }} />
+   ```
+   This approach is particularly useful when you need to customize the handling of the ref and perform additional logic when the element is mounted.
+2. Object Refs:
+   You can also use an object (typically created with `React.createRef()` or `useRef()`) as the `ref`. React will automatically attach the DOM element to the `current` property of the object when the component is mounted. This provides a more structured and direct way to access the DOM element. For example:
+   ```jsx
+   class MyComponent extends React.Component {
+     constructor(props) {
+       super(props);
+       this.myRef = React.createRef();
+     }
+     componentDidMount() {
+       // Access the DOM element with 'this.myRef.current'
+     }
+     render() {
+       return <input ref={this.myRef} />;
+     }
+   }
+   ```
+   Using object refs can make your code more readable and maintainable, especially when you need to access multiple elements.
+Both approaches are valid and serve different use cases. Using a function callback allows you to perform custom logic when the element is mounted, while using object refs provides a more structured and straightforward way to access the DOM element.
+It's worth noting that when you use object refs, React manages the attachment and cleanup of the DOM element automatically. With function callbacks, you need to handle any cleanup or side effects manually if necessary, especially when the component unmounts to prevent memory leaks.
+
+
+
+-----------
+When you use the `ref` attribute in React, it can refer to both the actual DOM element and the virtual DOM (vDOM) element, depending on how you use it.
+1. Ref to Actual DOM Element:
+   When you use a `ref` to reference a DOM element (e.g., an HTML `div`, `input`, or any other native HTML element), you are directly referencing the actual DOM element in the real browser Document Object Model. This allows you to interact with the DOM element directly, such as changing its properties or calling methods like `focus()` or `scrollIntoView()`. Here's an example:
+   ```jsx
+   class MyComponent extends React.Component {
+     constructor(props) {
+       super(props);
+       this.myInputRef = React.createRef();
+     }
+     componentDidMount() {
+       // Access and manipulate the actual DOM element
+       this.myInputRef.current.focus();
+     }
+     render() {
+       return <input ref={this.myInputRef} />;
+     }
+   }
+   ```
+   In this example, `this.myInputRef.current` represents the actual DOM `input` element.
+2. Ref to Virtual DOM Element:
+   In some cases, when you use a `ref` with a custom React component, you may be referencing a virtual DOM (vDOM) element, which is essentially a JavaScript representation of a component instance. This allows you to access and interact with the component's properties and methods. Here's an example:
+   ```jsx
+   class CustomComponent extends React.Component {
+     customMethod() {
+       // Custom method of the component
+     }
+     render() {
+       return <div>Custom Component</div>;
+     }
+   }
+   class MyComponent extends React.Component {
+     constructor(props) {
+       super(props);
+       this.customComponentRef = React.createRef();
+     }
+     componentDidMount() {
+       // Access and call custom methods of the virtual DOM element
+       this.customComponentRef.current.customMethod();
+     }
+     render() {
+       return <CustomComponent ref={this.customComponentRef} />;
+     }
+   }
+   ```
+   In this example, `this.customComponentRef.current` refers to the instance of the `CustomComponent` class, allowing you to call its custom methods.
+So, the behavior of the `ref` depends on what you are referencing:
+- When referencing native HTML elements, it points to the actual DOM element.
+- When referencing custom React components, it points to the virtual DOM element, which is a JavaScript object representing the component instance.
+
+
+-----------
+Here's the example you provided earlier, rewritten using function components and hooks:
+```jsx
+import React, { useRef, useEffect } from 'react';
+function CustomComponent() {
+  const customRef = useRef();
+  const customMethod = () => {
+    // Custom method of the component
+    console.log('Custom method called');
+  };
+  useEffect(() => {
+    customMethod();
+  }, []);
+  return <div>Custom Component</div>;
+}
+function MyComponent() {
+  const customComponentRef = useRef();
+  useEffect(() => {
+    // Access and call custom methods of the virtual DOM element
+    customComponentRef.current.customMethod();
+  }, []);
+  return <CustomComponent ref={customComponentRef} />;
+}
+export default MyComponent;
+```
+In this example:
+- `useRef` is used to create refs for both the `CustomComponent` and `MyComponent` functional components.
+- We define a custom method (`customMethod`) within the `CustomComponent` and call it using `customComponentRef.current.customMethod()` in the `MyComponent` component.
+- We use the `useEffect` hook to ensure that the custom method is called after the component has mounted, similar to how `componentDidMount` works in class components.
+This code achieves the same functionality as the class component example but using function components and hooks, which is a more modern approach in React development.
+
+
+------------
+useEffect hook:
+The `useEffect` hook is a fundamental part of React that allows you to perform side effects in your functional components. Side effects include data fetching, manually changing the DOM, subscribing to data sources, and more. `useEffect` is called after the component has rendered, and it can also clean up after itself. Here's how it works:
+Basic Syntax:
+```javascript
+import React, { useEffect } from 'react';
+
+function MyComponent() {
+  useEffect(() => {
+    // Code to run after the component renders
+
+    // Return a cleanup function (optional)
+    return () => {
+      // Code to run when the component unmounts (cleanup)
+    };
+  }, [/* Dependencies */]);
+
+  // ...
+}
+```
+- The first argument to `useEffect` is a function that contains the code you want to run as a side effect. This function runs after the initial render and after each subsequent render where the dependencies have changed.
+- The second argument to `useEffect` is an array of dependencies. If any of the dependencies change between renders, the effect function is re-run. If the dependencies are omitted, the effect runs after every render.
+- The return value of the effect function can be a cleanup function. This function is called when the component unmounts or when the dependencies change (before the effect runs again).
+Examples:
+1. Fetching Data:
+   ```javascript
+   import React, { useState, useEffect } from 'react';
+   function DataFetching() {
+     const [data, setData] = useState(null);
+     useEffect(() => {
+       // Fetch data from an API
+       fetch('https://jsonplaceholder.typicode.com/posts/1')
+         .then(response => response.json())
+         .then(data => setData(data));
+     }, []); // Empty dependency array, runs once after initial render
+     return (
+       <div>
+         {data ? (
+           <p>{data.title}</p>
+         ) : (
+           <p>Loading...</p>
+         )}
+       </div>
+     );
+   }
+   ```
+   In this example, the effect fetches data from an API after the initial render and stores it in the `data` state. The empty dependency array `[]` ensures that the effect runs only once.
+2. Managing a Timer:
+   ```javascript
+   import React, { useState, useEffect } from 'react';
+   function Timer() {
+     const [count, setCount] = useState(0);
+     useEffect(() => {
+       const intervalId = setInterval(() => {
+         setCount(prevCount => prevCount + 1);
+       }, 1000);
+
+       // Cleanup function to clear the interval when the component unmounts
+       return () => clearInterval(intervalId);
+     }, []); // Empty dependency array, runs once after initial render
+
+     return <div>Count: {count}</div>;
+   }
+   ```
+   Here, the effect sets up an interval to increment `count` every second. The cleanup function clears the interval when the component unmounts.
+3. Subscribing to a Data Source:
+   ```javascript
+   import React, { useState, useEffect } from 'react';
+   function SubscriptionExample() {
+     const [message, setMessage] = useState('');
+     useEffect(() => {
+       const subscription = subscribeToDataSource(data => {
+         setMessage(`Data received: ${data}`);
+       });
+       return () => {
+         // Unsubscribe when the component unmounts
+         subscription.unsubscribe();
+       };
+     }, []); // Empty dependency array, runs once after initial render
+     return <div>{message}</div>;
+   }
+   ```
+   In this example, the effect subscribes to a data source and updates the message when new data is received. The cleanup function unsubscribes from the data source when the component unmounts.
+
+The `useEffect` hook allows you to handle side effects in a declarative and efficient way, ensuring that your components are both interactive and well-behaved. By specifying dependencies, you control when the effect runs and when it cleans up, which helps prevent memory leaks and other issues.
+
+
+
+-------------
+sideeffect:
+Side effects in programming refer to actions or operations that occur outside the primary scope or flow of a program. They are typically interactions with the external world, such as modifying variables outside of a function's scope, making network requests, reading from or writing to files, updating the DOM in web development, and more. Side effects are called "side" because they occur alongside the main program logic and can have consequences that affect the program's behavior.
+
+In the context of React and other frontend libraries/frameworks, side effects often refer to operations that occur as a result of rendering or updating components. React provides the `useEffect` hook to manage these side effects in a declarative and controlled manner.
+Here are some common examples of side effects:
+1. Data Fetching: Making network requests to retrieve data from an API is a side effect. Data fetching can have side effects such as network latency and errors.
+2. DOM Manipulation: Changing the content or structure of the Document Object Model (DOM) in a web application is a side effect. This includes actions like adding, removing, or updating HTML elements.
+3. Timers and Intervals: Managing timers and intervals that execute code at specified intervals is a side effect. It can involve starting and stopping timers or intervals.
+4. Subscriptions: Subscribing to data sources, such as websockets or event listeners, and reacting to incoming data is a side effect. Cleanup may involve unsubscribing from these data sources.
+5. State Persistence: Storing data in local storage or cookies is a side effect because it involves interactions with the browser environment.
+6. Logging and Debugging: Printing log messages or debugging information to the console is a side effect that helps developers diagnose issues.
+7. File Operations: Reading from or writing to files on disk is a side effect, commonly found in server-side or desktop applications.
+8. Database Operations: Connecting to and querying databases is a side effect that involves interactions with external data storage.
+
+Side effects are an essential aspect of software development, but they can also introduce complexity and potential issues if not managed properly. Frameworks like React provide mechanisms (e.g., `useEffect`) to control and isolate side effects, ensuring that they are predictable and consistent with the application's logic. Properly handling side effects is crucial for building reliable and maintainable software.
+
+
+
+-------------
+Method Binding:
+Method binding is required in certain cases in JavaScript and React class components to ensure that a function (method) has access to the correct `this` context when it's executed. The need for method binding arises from the way JavaScript handles function execution and the dynamic nature of the language. Here are the key reasons why method binding is necessary:
+1. Function Execution Context: In JavaScript, the value of `this` inside a function depends on how that function is called. It's often referred to as the "execution context." The `this` context can change based on whether the function is called as a method of an object, as a standalone function, or using other mechanisms like event handlers.
+2. Class Methods: In the context of React class components, methods defined within a class are typically intended to operate on the instance of that class (i.e., the component instance). For these methods to access the component's state, props, or other instance-specific properties, they need to have the correct `this` context.
+3. Event Handlers: When you attach a function as an event handler in a React component, the function is called in a different context, and by default, `this` inside the function refers to the DOM element that triggered the event. To access the component's methods or state within the event handler, method binding is necessary.
+
+Here's an example to illustrate the need for method binding in a React class component:
+```javascript
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0,
+    };
+    // Without method binding, this.incrementCount would lose its correct context
+    this.incrementCount = this.incrementCount.bind(this);
+  }
+  incrementCount() {
+    // Accessing this.state.count is only possible with proper binding
+    this.setState({ count: this.state.count + 1 });
+  }
+  render() {
+    return (
+      <div>
+        <p>Count: {this.state.count}</p>
+        {/* Without binding, this.incrementCount would not work correctly */}
+        <button onClick={this.incrementCount}>Increment</button>
+      </div>
+    );
+  }
+}
+```
+In this example, `this.incrementCount` is a method that needs to access the component's `state` using `this`. Without proper binding in the constructor, `this` inside `incrementCount` would not refer to the component instance, and trying to access `this.state.count` would result in errors or unexpected behavior.
+By explicitly binding the method in the constructor, as shown in the example, you ensure that `this` always points to the correct component instance, allowing you to access and modify component-specific data and state within your methods.
+It's worth noting that modern JavaScript and React offer alternatives like arrow functions or class properties (field initializers) that automatically handle method binding, making your code more concise and readable. However, understanding method binding is still important when working with older codebases or in situations where you need to manage the `this` context manually.
+
+
+
+-----------
+React Context is a feature that allows you to share data between components without having to explicitly pass props through the component tree. It provides a way to manage global state or configuration data in your React application and is particularly useful for avoiding prop drilling (passing props down multiple levels of components).
+Here's an overview of how React Context works:
+1. Creating a Context:
+   You start by creating a context using the `React.createContext()` method. This method returns an object with `Provider` and `Consumer` components.
+   ```javascript
+   const MyContext = React.createContext();
+   ```
+2. Providing a Value:
+   Wrap your component tree with a `Provider` component that sets the context's value using the `value` prop.
+   ```javascript
+   <MyContext.Provider value={/* your data */}>
+     {/* Your component tree */}
+   </MyContext.Provider>
+   ```
+   The data provided via the `value` prop is then accessible to any component within the tree that subscribes to the context.
+3. Consuming the Context:
+   To access the context data, you can use the `Consumer` component or the `useContext` hook (in functional components).
+   - Using `Context.Consumer` (Class Components):
+     In class components, you can wrap a portion of your component with the `Context.Consumer` component. This component accepts a function as its child and passes the context value to that function as an argument.
+     ```javascript
+     <MyContext.Consumer>
+       {contextValue => (
+         // Use contextValue here
+       )}
+     </MyContext.Consumer>
+     ```
+   - Using `useContext` (Functional Components):
+     In functional components, you can use the `useContext` hook to directly access the context value.
+     ```javascript
+     const contextValue = useContext(MyContext);
+     // Use contextValue here
+     ```
+4. Consuming Multiple Contexts:
+   You can use multiple context providers in your component tree, and each context can be accessed separately using its respective `Provider` and `Consumer` or `useContext` hook.
+5. Fallback Value:
+   If a component attempts to access a context that does not have a `Provider` higher up in the tree, it will receive a default fallback value that you can specify when creating the context.
+   ```javascript
+   const MyContext = React.createContext(defaultValue);
+   ```
+React Context is a powerful feature for managing global state or sharing data across components when needed. It's commonly used for themes, user authentication, language settings, and other scenarios where you want to avoid prop drilling. However, it's essential to use it judiciously and avoid overusing it for every piece of shared data, as it can make your component tree less predictable and harder to maintain if misused.
+
+
+------------
+useReducer
+`useReducer` is a hook in React that is used for state management when you have complex state logic that involves multiple sub-values or when the next state depends on the previous one. It's an alternative to using the `useState` hook when you need to manage state in a more structured way.
+The `useReducer` hook takes two arguments:
+1. Reducer Function: This is a function that specifies how the state should be updated based on the previous state and an action. It receives two arguments: the current state and an action object, and it returns the new state.
+2. Initial State: This is the initial value of the state.
+Here's the basic syntax of `useReducer`:
+```javascript
+const [state, dispatch] = useReducer(reducer, initialState);
+```
+- `state`: This is the current state value.
+- `dispatch`: This is a function that you can call to dispatch an action, which will trigger the state update based on the logic defined in the reducer function.
+Here's an example of how `useReducer` can be used:
+```javascript
+import React, { useReducer } from 'react';
+// Reducer function
+const counterReducer = (state, action) => {
+  switch (action.type) {
+    case 'INCREMENT':
+      return { count: state.count + 1 };
+    case 'DECREMENT':
+      return { count: state.count - 1 };
+    default:
+      return state;
+  }
+};
+function Counter() {
+  // Initial state
+  const initialState = { count: 0 };
+  // Use useReducer with the reducer function and initial state
+  const [state, dispatch] = useReducer(counterReducer, initialState);
+  return (
+    <div>
+      <p>Count: {state.count}</p>
+      <button onClick={() => dispatch({ type: 'INCREMENT' })}>Increment</button>
+      <button onClick={() => dispatch({ type: 'DECREMENT' })}>Decrement</button>
+    </div>
+  );
+}
+export default Counter;
+```
+In this example:
+- We define a `counterReducer` function that specifies how the state should be updated based on the action type (either 'INCREMENT' or 'DECREMENT').
+- Inside the `Counter` component, we initialize the state with an initial count of 0 using `useReducer`.
+- We render the current count value from the state and provide buttons to dispatch actions to increment or decrement the count.
+- When a button is clicked, the `dispatch` function is called with an action object, which triggers the state update based on the logic defined in `counterReducer`.
+`useReducer` is especially useful when you have more complex state management needs, and it allows you to centralize the state logic in a reducer function, making your code more maintainable and predictable.
+
+
+
+-----------
+useMemo
+`useMemo` is a hook in React that allows you to memoize (cache) the result of a computation or function so that it's not recalculated on every render. This can be particularly useful for optimizing the performance of your React components by preventing unnecessary calculations and rendering when the inputs to a function remain the same.
+The basic syntax of `useMemo` is as follows:
+```javascript
+const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
+``
+
+- `computeExpensiveValue`: This is the function or computation whose result you want to memoize.
+- `[a, b]`: This is an array of dependencies. `useMemo` will recalculate the memoized value whenever one or more of these dependencies change. If the dependencies haven't changed since the last render, the cached value is returned instead.
+- `memoizedValue`: This is the result of the computation, which will be memoized and returned by `useMemo`.
+Here's a simple example of how `useMemo` can be used:
+```javascript
+import React, { useState, useMemo } from 'react';
+function ExpensiveCalculation({ value }) {
+  // Calculate a factorial value (just an example of an expensive computation)
+  const factorial = useMemo(() => {
+    let result = 1;
+    for (let i = 1; i <= value; i++) {
+      result *= i;
+    }
+    return result;
+  }, [value]);
+  return (
+    <div>
+      <p>Factorial of {value} is {factorial}</p>
+    </div>
+  );
+}
+function App() {
+  const [inputValue, setInputValue] = useState(5);
+
+  return (
+    <div>
+      <input
+        type="number"
+        value={inputValue}
+        onChange={(e) => setInputValue(parseInt(e.target.value))}
+      />
+      <ExpensiveCalculation value={inputValue} />
+    </div>
+  );
+}
+export default App;
+```
+In this example:
+- We have a `ExpensiveCalculation` component that calculates the factorial of a given value. Calculating the factorial is an expensive operation.
+- We use `useMemo` to memoize the factorial calculation so that it only recalculates when the `value` prop changes.
+- In the `App` component, we have an input field that allows us to change the value passed to `ExpensiveCalculation`. When we change the input value, only the necessary calculations are performed, and the memoized result is reused when the input value remains the same.
+`useMemo` is particularly useful for optimizing components that perform expensive calculations or computations, especially when those calculations depend on specific props or state values. It helps prevent unnecessary work and can significantly improve the performance of your React application.
+
+
+
+-----------
+useCallback
+`useCallback` is a hook in React that memoizes (caches) a callback function. It is used to optimize the performance of React components by preventing unnecessary re-renders of child components when functions are passed as props. By memoizing the callback function, you ensure that it remains stable between renders unless its dependencies change.
+The basic syntax of `useCallback` is as follows:
+```javascript
+const memoizedCallback = useCallback(callbackFunction, dependencies);
+```
+- `callbackFunction`: This is the callback function that you want to memoize.
+- `dependencies`: An array of values (usually props or state values) that the callback function depends on. The memoized callback will only be recreated if one or more of these dependencies change.
+- `memoizedCallback`: This is the memoized version of the callback function.
+Here's a simple example of how `useCallback` can be used:
+```javascript
+import React, { useState, useCallback } from 'react';
+function Button({ onClick }) {
+  console.log('Button component rendered');
+  return <button onClick={onClick}>Click Me</button>;
+}
+function App() {
+  const [count, setCount] = useState(0);
+  // Create a memoized callback using useCallback
+  const handleClick = useCallback(() => {
+    setCount(count + 1);
+  }, [count]);
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <Button onClick={handleClick} />
+    </div>
+  );
+}
+export default App;
+```
+In this example:
+- We have a `Button` component that takes an `onClick` prop.
+- Inside the `App` component, we use `useCallback` to memoize the `handleClick` function, which is passed as the `onClick` prop to the `Button` component.
+- The `useCallback` hook takes the `handleClick` function and the `[count]` dependency array. This means that the `handleClick` function will only be recreated if the `count` state changes.
+- As a result, when you click the button, the `Button` component is not re-rendered, even though it uses the `handleClick` function, because the function is stable unless `count` changes.
+`useCallback` is particularly useful when dealing with child components that receive callback functions as props, ensuring that the child components don't re-render unnecessarily when the parent component re-renders. It helps in optimizing the performance of your React application, especially in cases where components have complex rendering logic or are part of large lists.
+
+
+
+-------------
+useLayoutEffect
+`useLayoutEffect` is a hook in React that is similar to `useEffect`. It's used for scheduling a function to run after the browser has painted, but before the next frame is rendered. The key difference between `useLayoutEffect` and `useEffect` is when they run in the component lifecycle:
+- `useLayoutEffect` runs synchronously immediately after all DOM mutations. This is right after the DOM has been updated but before the browser has had a chance to repaint. It's very similar to the `componentDidMount` and `componentDidUpdate` lifecycle methods in class components.
+- `useEffect`, on the other hand, runs asynchronously after the component has rendered and the browser has had a chance to paint. It's less likely to block the main thread and is suitable for tasks that don't need to be executed synchronously with DOM updates.
+Here's the basic syntax of `useLayoutEffect`:
+```javascript
+useLayoutEffect(() => {
+  // Your code here
+}, [dependencies]);
+```
+- The first argument is a function that contains the code to be executed.
+- The second argument is an array of dependencies, similar to `useEffect`. If any of these dependencies change between renders, the effect function will be re-executed.
+Here's an example of how `useLayoutEffect` can be used:
+```javascript
+import React, { useState, useLayoutEffect } from 'react';
+function App() {
+  const [count, setCount] = useState(0);
+  useLayoutEffect(() => {
+    // This code will run immediately after the DOM is updated
+    console.log('useLayoutEffect ran');
+  }, [count]);
+  const increment = () => {
+    setCount(count + 1);
+  };
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={increment}>Increment</button>
+    </div>
+  );
+}
+export default App;
+```
+In this example, the `useLayoutEffect` runs immediately after the DOM is updated when the button is clicked. This is because it has a dependency on the `count` state, and the DOM updates are synchronous with the state change.
+It's important to use `useLayoutEffect` when you need to perform synchronous, layout-affecting operations. However, it's essential to be mindful of performance and ensure that it doesn't lead to blocking the main thread, as that can negatively impact user experience. In many cases, `useEffect` is more suitable because it runs asynchronously, allowing the browser to repaint more smoothly.
+
+
 
 --------------
+
+mounting phase:  contructor - getDerivedStateFromProps - render - componentDidMount
+updating phase: getDerivedStateFromProps - shouldComponentUpdate - render - getSnapShotBeforeUpdate - ComponentDidUpdate
+unmounting phase: componentWillUnmount
+
+ReactDom.unmountComponentAtNode(document.getElementById('root')) // method to unmount component
+
+
+
+
+--------------
+REACT HYDRATION
+React hydration is a technique used that is similar to rendering, but instead of having an empty DOM to render all of your react components into, you have a DOM that has already been built with all your components rendered as HTML.
+The hydration step will take this pre-built HTML, compare it to your component tree, and then refresh it with the live react components which will add on all the event listeners and JavaScript that you need to make your application fully functional.
+So, simply put, react hydration is similar to react render, but for applications that have already been pre-built on the server side.
+React hydration is mainly needed if you need to build your HTML server side before the client gets to it, so instead of having a DOM with just an empty root element, you have a fully built application with all the elements, copy and components saved as HTML.
+Once you have this pre-built HTML application, the hydration step will then compare and apply your React code into it to create a functional react application with all the event listeners and other interactive features that you need JavaScript to do.
+In other words, instead of serving the client an empty HTML document, you serve the client a complete HTML document with all your data, copy and elements that should be in there.
+This is mainly useful for SEO, speeding up the initial load time of pages and any server side rendered application that needs the HTML before serving it to the client.
+
+here is an example of an empty application that does not need to use hydration:
+Basic react application:
+const root = document.querySelector("#root");
+ReactDOM.render(<h1>Hello World</h1>, root);
+The static html for the basic application:
+<html>
+  <head></head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
+The output of the application before loading scripts on client side:
+<html>
+  <head></head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
+The output of the application after loading scripts on client side:
+<html>
+  <head></head>
+  <body>
+    <div id="root">
+      <h1>Hello World</h1>
+    </div>
+  </body>
+</html>
+And here is the exact equivalent but this time using a pre-built application that uses hydration:
+const root = document.querySelector("#root");
+ReactDOM.hydrate(<h1>Hello World</h1>, root);
+The static html for the basic application:
+<html>
+  <head></head>
+  <body>
+    <div id="root">
+      <h1>Hello World</h1>
+    </div>
+  </body>
+</html>
+The output of the application before loading scripts on client side:
+<html>
+  <head></head>
+  <body>
+    <div id="root">
+      <h1>Hello World</h1>
+    </div>
+  </body>
+</html>
+The output of the application after loading scripts on client side:
+<html>
+  <head></head>
+  <body>
+    <div id="root">
+      <h1>Hello World</h1>
+    </div>
+  </body>
+</html>
+React render (ReactDOM.render) can be used to render an application on an empty route from scratch, whereas React hydrate (ReactDOM.hydrate) can be used on a pre-built HTML template to “hydrate” the application which means to add back in any functionality your JavaScript added to your elements such as event listeners, and so on.
+
+
+
+
+
+
+-------
+react-bootstrap-typeahead package
+
+event handlers should be a method in component class
+
+link and navlink
+
+js expressions are written inside curly braces inside jsx code
+hooks:
+useState, useRef, useEffect, useReducer, useMemo, useCallback, useLayoutEffect, useContext, useDebugValue
+custom hooks
+
+we can listen to change in path url using props.history.listen
+props.history.listen((location, action)=> {})
+
+history object has properties -> length, push, replace, block
+
+facebook integration, google integration -> logging in through facebook or google
+https://developers.facebook.com/
+https://console.developers.google.com/
+https://developer.paytm.com/
+https://dashboard.paytm.com/next/apikeys/

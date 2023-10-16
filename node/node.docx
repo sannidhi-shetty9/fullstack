@@ -808,41 +808,28 @@ This example demonstrates a basic separation of concerns following the MVC patte
 
 -------------
 CommonJS (Common JavaScript) is a module system and specification for organizing and structuring JavaScript code in a modular and reusable way. It was originally developed for server-side JavaScript, particularly in the context of the Node.js runtime. The primary goal of CommonJS is to allow JavaScript code to be divided into small, manageable modules that can be easily imported and used in other parts of an application.
-
 Here are the key features and concepts of CommonJS:
-
-1. **Module Definition**: CommonJS defines a module as a separate JavaScript file, where each file encapsulates a piece of functionality or code. Modules are the building blocks of CommonJS applications.
-
-2. **Exports and Require**: CommonJS introduces two fundamental functions for working with modules:
+1. Module Definition: CommonJS defines a module as a separate JavaScript file, where each file encapsulates a piece of functionality or code. Modules are the building blocks of CommonJS applications.
+2. Exports and Require: CommonJS introduces two fundamental functions for working with modules:
    - `require()`: Used to import (or "require") a module and make its functionality available in the current module.
    - `exports`: An object that allows a module to expose its functionality to other modules. You can add properties and functions to `exports` to make them accessible when the module is required elsewhere.
-
-3. **Synchronous Loading**: One key characteristic of CommonJS modules is that they are loaded synchronously. When you use `require()`, the module is loaded and executed immediately, and its exports are available for use.
-
-4. **Caching**: CommonJS modules are cached after the first load. If the same module is required again in another part of the application, Node.js will return the cached module instead of reloading it. This helps improve performance and avoids circular dependencies.
-
+3. Synchronous Loading: One key characteristic of CommonJS modules is that they are loaded synchronously. When you use `require()`, the module is loaded and executed immediately, and its exports are available for use.
+4. Caching: CommonJS modules are cached after the first load. If the same module is required again in another part of the application, Node.js will return the cached module instead of reloading it. This helps improve performance and avoids circular dependencies.
 Here's a simple example of a CommonJS module and how it can be used:
-
-**myModule.js** (A CommonJS module):
-
+myModule.js (A CommonJS module):
 ```javascript
 // Define a module with exports
 const greet = (name) => {
   return `Hello, ${name}!`;
 };
-
 // Export the greet function
 exports.greet = greet;
 ```
-
-**main.js** (Another CommonJS module):
-
+main.js (Another CommonJS module):
 ```javascript
 // Require the myModule.js module
 const myModule = require('./myModule');
-
 // Use the exported function
 console.log(myModule.greet('Alice')); // Output: Hello, Alice!
 ```
-
 CommonJS is widely used in server-side JavaScript, especially in Node.js applications, where it provides a clean and organized way to structure code. However, it's important to note that CommonJS is primarily designed for synchronous module loading, which may not be ideal for all use cases, particularly in modern web development where asynchronous loading and bundling are common practices. As a result, in web development, tools like Webpack and ES6 modules (import/export) have gained popularity for managing JavaScript modules.
