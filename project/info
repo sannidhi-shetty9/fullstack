@@ -1,0 +1,29 @@
+Project 1: Local Farmers (E-Commerce Platform)
+    Technology: React, React Native, Node js, Express, MongoDB,
+    Description: Local Farmers, is an e-commerce platform for selling and buying fresh and organic farm products. The platform uses Express and Node JS as the backend, MongoDB as the database, React for the admin panel web app (for admin), and React Native for the mobile app (for buyers). It includes features to register,  sell and buy products and allows sellers to create a marketplace for their products. The platform includes a payment gateway, and an embedded map to locate addresses.
+    Responsibility:
+        Developed responsive and interactive user interfaces. 
+        Worked with back-end developers to design APIs and consumed APIs provided from the backend to build the interface to sell and buy products
+        Wrote clean and dynamic code in Javascript, React JS.
+        Coordinated deployments of new features, updates, and fixes.
+        Contributed ideas and suggestions in team meetings and delivered updates on deadlines, designs, and enhancements.
+        Resolved Jira tickets with comprehensive bug ﬁxes
+        Primarily worked on the admin panel (website). Developed interfaces to create and edit orders. This included integrating maps to allow users to fetch locations. Had used redux for state management.
+        Also developed features to add and update new products. Which also includes features such as adding and fetching product images.
+        Had also worked in the Native app to implement features including shopping cart and new orders.
+
+Project 2: Shalghya (EdTech website)
+    Technology: React, Next js, Node js, Express, MongoDB
+    Description: Shlaghya is an EdTech Platform, which provides online training videos and tests to students. The platform uses Express and Node JS as the backend server, MongoDB as the database, and React (Next js) for the web app. It includes features for teachers to create courses, add videos and create online tests. Students can register, watch videos, and takeup tests. The tests are MCQ tests, which include multiple images as well. The tests had features such as allocating test duration, detecting tab/window change, and preventing multiple attempts to prevent malpractices.
+    Responsibility:
+        Designed the architecture and developed responsive and interactive user interfaces.
+        Built the backend server, developed APIs, and consumed APIs to build the interface to create courses, videos, tests and attend tests.
+        Coordinated with the client for feature improvement and bug fixes.
+
+Project 3: Food Delivery app
+    Technology: React, Node js, Express, MongoDB,
+    Description: Built a web app for online food delivery for a hotel. The platform uses Express and Node JS as the backend server, MongoDB as the database, and React for the web app. The app provided the admin interface to add products to the menu and process new orders. The user is provided with interfaces to register, check menu, and update the cart. It also included features such as payment gateway and order status page.
+    Responsibility:
+        Designed the architecture and developed responsive and interactive user interfaces.
+        Built the backend server, developed APIs, and consumed APIs to build the interface to create courses, videos, tests and attend tests.
+        Coordinated with the client for feature improvement and bug fixes.

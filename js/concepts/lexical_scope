@@ -8,6 +8,23 @@ Key characteristics of lexical scope:
 2. Static Resolution: Variable and function name resolution is determined at compile time, based on the lexical structure of the code. This means that the compiler or interpreter can determine the variable references without executing the code.
 3. Closures: Lexical scoping enables closures, a powerful feature in programming languages. Closures allow functions to "remember" the scope in which they were defined, even if they are executed in a different scope. This behavior enables functions to maintain references to variables from their enclosing (lexical) scope even after the outer function has finished executing.
 
+```javascript
+function outerFunction() {
+  let outerVariable = "I am from the outer function";
+  
+  function innerFunction() {
+    console.log(outerVariable); // inner function can access the outer variable
+  }
+  
+  return innerFunction;
+}
+
+const closureExample = outerFunction();
+closureExample(); // This will log "I am from the outer function" even though outerFunction has already returned.
+```
+
+In this example, `innerFunction` is a closure because it can access the `outerVariable` from its containing scope, even after `outerFunction` has finished executing. When you call `closureExample()`, it still has access to the `outerVariable` due to the closure, and it logs the value of `outerVariable`.
+
 JavaScript is a language that follows lexical scoping rules. Consider the following example:
 
 ```javascript

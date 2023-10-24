@@ -1,53 +1,32 @@
 CSS: 
-
 CSS stands for Cascading Style Sheets 
-
 CSS describes how HTML elements are to be displayed on screen, paper, or in other media 
-
 CSS is used to define styles for your web pages, including the design, layout and variations in display for different devices and screen sizes. 
 
- 
 
 CSS Selector: 
-
 Syntax: 
-
 Selector {property: value; property: value;} 
-
  
-
 CSS selectors are used to "find" (or select) the HTML elements you want to style. 
-
 We can divide CSS selectors into five categories: 
-
 Simple selectors (select elements based on name, id, class) 
-
 Combinator selectors (select elements based on a specific relationship between them) 
-
 Pseudo-class selectors (select elements based on a certain state) 
-
 Pseudo-elements selectors (select and style a part of an element) 
-
 Attribute selectors (select elements based on an attribute or attribute value) 
 
- 
-
-Element Selector: elementName 
-
+>Element Selector: elementName 
 element { 
 
 } 
-
- 
 
 p { 
   text-align: center; 
   color: red; 
 } 
 
- 
-
-Id Selector:  #idName 
+>Id Selector:  #idName 
 
 #id { 
 
@@ -58,7 +37,7 @@ Id Selector:  #idName
   color: red; 
 } 
 
-Class Selector: #classname 
+>Class Selector: #classname 
 
 .class { 
 
@@ -70,44 +49,34 @@ Class Selector: #classname
 } 
 
  
-
-Universal Selector: * 
+>Universal Selector: * 
 
  
-
-Grouping Selector:  
+>Grouping Selector:  
 
 h1, h2, p { 
   text-align: center; 
   color: red; 
 } 
 
- 
-
-Selector 
-
+>Selector 
 Example 
-
 Example description 
 
 #id 
-
 #firstname 
 
 Selects the element with id="firstname" 
 
 .class 
-
 .intro 
 
 Selects all elements with class="intro" 
 
 element.class 
-
 p.intro 
 
 Selects only <p> elements with class="intro" 
-
 * 
 
 * 
@@ -121,9 +90,7 @@ p
 Selects all <p> elements 
 
 element,element,.. 
-
 div, p 
-
 Selects all <div> elements and all <p> elements 
 
  
@@ -146,7 +113,6 @@ External Css:
 </html> 
 
  
-
 MyStyles.css file 
 
 body { 
@@ -185,9 +151,6 @@ h1 {
 </html> 
 
  
-
- 
-
 Inline CSS: 
 
 <!DOCTYPE html> 
@@ -208,6 +171,177 @@ Main axis -> justify-content
 
 Vertical axis -> Align-items 
 
+
+-------------------
+VIEW PORT
+The term "viewport" has different meanings depending on the context in which it's used. In web development and design, it typically refers to one of the following:
+1. **Browser Viewport**: The browser viewport, often simply referred to as the "viewport," is the visible portion of a web page displayed within a web browser. It's the area of the web page that is currently visible to the user on their screen. The size of the browser viewport can vary depending on the user's device, screen size, and browser window dimensions. It is essential for responsive web design as it affects how content is displayed on different devices.
+2. **Viewport Meta Tag**: In the context of web development, the "viewport meta tag" is a special HTML meta tag that is often used to control the initial scale and behavior of a web page on mobile devices. It allows web developers to set the initial zoom level and scaling of the page to ensure proper rendering on mobile screens. For example, you can use the viewport meta tag to make a web page responsive on mobile devices.
+   Here's an example of how to use the viewport meta tag:
+   ```html
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   ```
+   This code sets the viewport width to the device's width and sets the initial scale to 1, which means the page is not zoomed in or out by default on mobile devices.
+3. **Virtual or Layout Viewport**: The "virtual viewport" or "layout viewport" refers to the size of the layout grid that the web browser uses to render web pages. This is usually larger than the physical screen dimensions to accommodate various designs and responsive layouts.
+
+
  
 
 -------------------- 
+DISPLAY
+In CSS, the `display` property is used to control how an element is displayed on a web page. It determines the type of box an element generates and how it interacts with other elements. The `display` property can take on various values, each affecting the layout and behavior of the element differently. Here are some common values for the `display` property:
+1. `block`: This value causes the element to generate a block-level box, taking up the full width of its parent container and starting on a new line. Block-level elements naturally stack on top of each other. Examples include `<div>`, `<p>`, `<h1>` to `<h6>`, and `<ul>` or `<ol>`.
+2. `inline`: This value causes the element to generate an inline-level box, allowing it to flow within the content alongside text and other inline-level elements. It does not start on a new line and only takes up as much width as necessary. Examples include `<span>`, `<a>`, and `<strong>`.
+3. `inline-block`: This value combines features of both `block` and `inline`. It generates a box that flows within the content like an inline element but allows you to set width, height, margins, and padding like a block-level element.
+4. `none`: This value hides the element from the layout and removes it from the flow entirely. The element won't take up any space on the page, and its content will be invisible. It's often used for hiding elements based on certain conditions.
+5. `flex`: This value establishes a flex container, enabling flexible layout and alignment of its child elements. It's used in combination with flex properties to create responsive and dynamic layouts.
+6. `grid`: This value establishes a grid container, allowing you to create complex layouts by defining rows and columns. Child elements can be positioned within the grid cells with precise control.
+7. `table`, `table-row`, `table-cell`: These values simulate the behavior of table elements. While not commonly used for actual table layouts, they can be used to create certain types of layouts where you need elements to behave like table rows and cells.
+These are just a few of the common `display` property values. Each value has its own unique properties and behaviors, and understanding how they work is crucial for designing and controlling the layout of web pages effectively. Keep in mind that the choice of `display` value can significantly affect the positioning and interaction of elements within the CSS box model.
+
+
+
+---------
+VISIBLITY
+The `visibility` property in CSS controls the visibility of an element, allowing you to make an element hidden while still occupying its space in the layout. The two possible values for the `visibility` property are:
+1. `visible` (default): This value makes the element visible and fully participates in the layout, as you would normally expect.
+2. `hidden`: This value makes the element invisible, but it still occupies space in the layout as if it were visible. In other words, the element is not displayed, but its space is reserved, and it can affect the positioning of other elements around it.
+Here's how you can use the `visibility` property:
+```css
+/* Hiding an element with ID "myElement" */
+#myElement {
+  visibility: hidden;
+}
+```
+In this example, replace `"myElement"` with the actual ID or class of the element you want to hide.
+Here's a key difference between using `display: none;` and `visibility: hidden;`:
+- With `display: none;`, the element is removed from the layout entirely, and it doesn't occupy any space. It's as if the element doesn't exist in the document structure.
+- With `visibility: hidden;`, the element becomes invisible, but it still occupies space in the layout. This means other elements will behave as if the hidden element is still there, affecting their positioning and layout.
+Choose between `display: none;` and `visibility: hidden;` based on your specific needs. If you want to completely remove an element from the layout, use `display: none;`. If you want to hide an element while preserving its space in the layout, use `visibility: hidden;`.
+
+
+--------
+OVERLAPPING ELEMENTS
+To overlap two elements in CSS, you can use positioning and z-index properties. Here's a step-by-step guide to overlapping elements:
+1. **HTML Structure**:
+First, create the HTML structure for the two elements you want to overlap. For example, let's create two `<div>` elements with different content:
+```html
+<div class="element1">Element 1</div>
+<div class="element2">Element 2</div>
+```
+2. **CSS Styling**:
+Apply CSS styles to position and overlap the elements. Use the `position`, `top`, `left`, and `z-index` properties to control the positioning and stacking order:
+```css
+.element1 {
+  position: absolute; /* Allows precise positioning */
+  top: 50px; /* Adjust the top position as needed */
+  left: 50px; /* Adjust the left position as needed */
+  z-index: 1; /* Determines the stacking order; higher values are on top */
+  background-color: blue;
+  padding: 10px;
+  color: white;
+}
+.element2 {
+  position: absolute;
+  top: 70px; /* Adjust the top position as needed */
+  left: 70px; /* Adjust the left position as needed */
+  z-index: 2; /* Higher z-index value, so it appears on top of element1 */
+  background-color: red;
+  padding: 10px;
+  color: white;
+}
+```
+In this example, `position: absolute;` is used to take elements out of the normal flow of the document, allowing precise positioning. You can adjust the `top` and `left` values to position the elements where you want.
+The `z-index` property determines the stacking order. In this case, `element2` has a higher `z-index` value than `element1`, so it appears on top.
+3. **View the Result**:
+With these styles applied, `element2` will overlap `element1`. Adjust the `top`, `left`, and `z-index` values as needed to achieve the desired positioning and overlap.
+Remember that positioning elements with `position: absolute;` can affect the layout, and it's important to ensure that overlapping elements don't obscure important content or cause usability issues on your webpage.
+
+
+------------
+CSS offers various units of measurement to specify sizes, lengths, and dimensions. Here are some commonly used CSS units:
+1. **Pixels (`px`):** The most common unit of measurement. One pixel is equal to one device's screen pixel. It's an absolute unit and does not scale with the user's settings.
+2. **Em (`em`):** A relative unit that is relative to the font size of the current element or its parent element. For example, if the font size of an element is 16px, 1em is equal to 16px.
+3. **Rem (`rem`):** A relative unit similar to `em`, but it's relative to the root (usually the `<html>`) element's font size. This makes it less prone to compounding effects.
+4. **Percentage (`%`):** A relative unit used to specify dimensions as a percentage of a parent element's size.
+5. **Viewport Width (`vw`) and Viewport Height (`vh`):** These units are relative to the size of the viewport (the visible area in the browser window). `1vw` is equal to 1% of the viewport width, and `1vh` is equal to 1% of the viewport height. They are useful for creating responsive designs.
+6. **Viewport Min (`vmin`) and Viewport Max (`vmax`):** These units are also relative to the viewport, but they scale based on the minimum or maximum dimension of the viewport. `1vmin` is equal to 1% of the smaller of viewport width and height, and `1vmax` is equal to 1% of the larger of viewport width and height.
+7. **Centimeters (`cm`), Millimeters (`mm`), Inches (`in`), and Points (`pt`):** Absolute units based on physical measurements. They are not commonly used for web design due to the variability of screen sizes.
+8. **Picas (`pc`):** Another absolute unit, rarely used in web design.
+9. **Root Aspect Ratio (`ar`):** A unit designed for use with `@page` rules in paged media.
+10. **Character Units (`ch`):** Equal to the width of the "0" character in the font used.
+11. **Grid Fraction (`fr`):** Used in grid layout, it represents a fraction of the available space in a grid container.
+12. **Points (`pt`):** Often used for print styles, 1 point is approximately equal to 1/72nd of an inch.
+13. **Picas (`pc`):** Equal to 12 points, or approximately 1/6th of an inch.
+14. **Custom Properties (`var()`):** While not a unit of measurement, custom properties are variables that can be used to define and reuse values in CSS. They are commonly used to manage responsive designs.
+Different units serve different purposes in web design, and the choice of unit depends on the design's requirements and responsiveness goals. It's important to understand how each unit works to create consistent and adaptable layouts.
+
+
+-------------
+REM
+`rem` is a CSS unit of measurement that stands for "root em." It's relative to the font size of the root element of the HTML document, which is typically the `<html>` element. This makes `rem` units especially useful for creating designs that scale proportionally, even if the user adjusts the base font size in their browser settings.
+Here's how `rem` works:
+1. **Defining the Base Font Size**: The `rem` unit is based on the font size of the root element (`<html>`). By default, the root font size is 16 pixels (16px) in most web browsers. However, this value can be changed in CSS.
+2. **Using `rem` Units**: When you use `rem` units in your CSS, they are relative to the root font size. For example, if the root font size is 16px and you set an element's font size to `2rem`, it will be 2 times the root font size, or 32px.
+3. **Scaling with the Root Font Size**: If you change the root font size, all `rem` units in your CSS will scale proportionally. For instance, if you change the root font size to 20px, the same `2rem` font size will now be 40px.
+Here's an example of how to set a font size using `rem`:
+```css
+html {
+  font-size: 20px; /* Change the root font size to 20px */
+}
+body {
+  font-size: 1rem; /* 1rem will be equal to the root font size (20px in this case) */
+}
+```
+This way, changing the root font size will affect all elements using `rem` units throughout the document, providing a consistent and scalable design.
+`rem` units are often preferred over `em` units because they avoid the problem of compounding. In contrast, `em` units are relative to the font size of their parent element, which can lead to compounding effects, making it harder to predict the final size of an element.
+
+
+--------------
+SLIGHT DARK TRANSPARENT BACKGROUND
+To create a slightly dark, transparent background using CSS, you can use the `rgba` color notation to specify a color with an alpha (transparency) value. Here's how you can do it:
+```css
+.background {
+  background-color: rgba(0, 0, 0, 0.5); /* RGB color with alpha value (0.5 for 50% opacity) */
+}
+```
+In this example, `rgba(0, 0, 0, 0.5)` represents a slightly dark grayish-black color with a 50% opacity. You can adjust the alpha value to make the background more or less transparent as needed. A smaller alpha value makes it more transparent, while a larger alpha value makes it less transparent.
+Then, you can apply this CSS class to the element or container where you want to have the slightly dark, transparent background:
+```html
+<div class="background">
+  <!-- Your content goes here -->
+</div>
+```
+This will give the element a slightly dark, semi-transparent background. You can customize the color and opacity to achieve the desired visual effect.
+
+
+
+-------------
+STRECHING SPECIFIC CHILD ELEMENT
+If you want to stretch only specific flex items along the cross-axis in a flex container while leaving others unaffected, you can target those specific items and apply the `align-self` property. Here's how to do it:
+```css
+.flex-container {
+  display: flex;
+  /* Other container styles */
+}
+.flex-item {
+  /* Styles for your flex items */
+}
+.stretch-item {
+  align-self: stretch; /* This stretches the specific item along the cross-axis */
+}
+```
+In this CSS:
+- `.flex-container` is the flex container element that contains the flex items.
+- `display: flex;` is used to define the element as a flex container.
+- `.flex-item` represents the general styling for your flex items.
+Now, create your HTML structure with the flex container and flex items:
+```html
+<div class="flex-container">
+  <div class="flex-item">Item 1</div>
+  <div class="flex-item stretch-item">Item 2 (Stretched)</div>
+  <div class="flex-item">Item 3</div>
+</div>
+```
+In this example, the second flex item with the class `.stretch-item` will be stretched along the cross-axis, while the other items will retain their default cross-axis size.
+This way, you can selectively apply stretching behavior to specific child elements within the flex container while leaving others unchanged.

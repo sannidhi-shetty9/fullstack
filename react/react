@@ -909,31 +909,23 @@ By using `useHistory`, you can perform client-side navigation in response to use
 
 ------
 In the context of the `history.push()` and `history.replace()` methods in React Router, the `[state]` parameter is an optional piece of state that you can pass along with the navigation. This state is associated with the route you are navigating to and can be accessed when you reach the target route.
-
 Here's how it works:
-
-1. **`history.push(path, [state])`**:
+1. `history.push(path, [state])`:
    - The `path` parameter is the URL path or route you want to navigate to.
    - The `[state]` parameter is an optional JavaScript object that you can provide. This state can contain any data or information you want to pass to the target route.
    - The target route will receive the state as a `location` object via the `location.state` property.
-
-2. **`history.replace(path, [state])`**:
+2. `history.replace(path, [state])`:
    - Similar to `push()`, `replace()` is used to navigate to a different route.
    - The `[state]` parameter, again, is an optional object that you can use to pass data to the target route. This state is accessible via the `location.state` property on the target route.
-
 Here's an example of how to use the `[state]` parameter with `history.push()`:
-
 ```jsx
 import { useHistory } from 'react-router-dom';
-
 const MyComponent = () => {
   const history = useHistory();
-
   const navigateWithState = () => {
     const user = { id: 123, name: 'John' };
     history.push('/user/123', { user }); // Navigate to the user's profile with user data
   };
-
   return (
     <div>
       <button onClick={navigateWithState}>Go to User Profile</button>
@@ -941,43 +933,32 @@ const MyComponent = () => {
   );
 };
 ```
-
 In this example, when you navigate to the '/user/123' route, the user object will be available in the `location.state` of the target route. You can access it like this:
-
 ```jsx
 import { useLocation } from 'react-router-dom';
-
 const UserProfile = () => {
   const location = useLocation();
   const user = location.state.user; // Access the user data passed with the state
   // Render the user's profile using the user data
 };
 ```
-
 The ability to pass state between routes is useful for scenarios where you want to carry information from one route to another without relying on global state management.
 
 
 -------
 `useLocation` is a hook provided by the React Router library, which is commonly used for accessing the current location or URL in a React component. It allows you to retrieve information about the current route, including the pathname, search parameters, and hash.
-
 Here's how you can use `useLocation`:
-
-1. **Import the Hook**:
+1. Import the Hook:
    First, you need to import the `useLocation` hook from the React Router library.
-
    ```jsx
    import { useLocation } from 'react-router-dom';
    ```
-
-2. **Use the `useLocation` Hook**:
+2. Use the `useLocation` Hook:
    You can use the `useLocation` hook within a functional component to access the current location object.
-
    ```jsx
    import { useLocation } from 'react-router-dom';
-
    const MyComponent = () => {
      const location = useLocation();
-
      return (
        <div>
          <h1>Current Location: {location.pathname}</h1>
@@ -985,55 +966,38 @@ Here's how you can use `useLocation`:
      );
    };
    ```
-
 In this example:
 - We import `useLocation` from `react-router-dom`.
 - Inside the functional component, we call `useLocation()` to get the `location` object.
 - We can access various properties of the `location` object to obtain information about the current route. In this case, we access `location.pathname` to get the pathname of the current route.
-
 Properties of the `location` object include:
-
-- **`pathname`**: A string representing the current route's path.
-- **`search`**: A string representing the query string or search parameters, including the leading '?' character (e.g., `?id=123&name=John`).
-- **`hash`**: A string representing the fragment identifier or hash portion of the URL, including the leading '#' character (e.g., `#section1`).
-- **`state`**: An optional state object that can be passed during navigation using `history.push()` or `history.replace()`.
-
+- `pathname`: A string representing the current route's path.
+- `search`: A string representing the query string or search parameters, including the leading '?' character (e.g., `?id=123&name=John`).
+- `hash`: A string representing the fragment identifier or hash portion of the URL, including the leading '#' character (e.g., `#section1`).
+- `state`: An optional state object that can be passed during navigation using `history.push()` or `history.replace()`.
 `useLocation` is particularly useful when you need to access and display the current route's information, such as highlighting the active route in a navigation menu or showing route-specific content based on the URL.
 
 ------
 In React Router, `props.match` is a prop provided to components that are rendered by a `<Route>` component. It contains information about how the current URL matches the path specified in the `<Route>` component, including route parameters and other route-related data.
-
 Here's an overview of the properties available within `props.match`:
-
-1. **`match.params`**: An object containing key-value pairs for route parameters. If your route path includes dynamic segments like `:id` or `:username`, the values extracted from the URL will be available in `match.params`.
-
+1. `match.params`: An object containing key-value pairs for route parameters. If your route path includes dynamic segments like `:id` or `:username`, the values extracted from the URL will be available in `match.params`.
    For example, if you have a route like this:
    ```jsx
    <Route path="/user/:id" component={UserProfile} />
    ```
-
    The `match.params` object in the `UserProfile` component will contain the `id` parameter, which corresponds to the part of the URL matched to `:id`.
-
-2. **`match.url`**: A string representing the matched portion of the URL. This can be useful for constructing links and generating URLs based on the current route.
-
+2. `match.url`: A string representing the matched portion of the URL. This can be useful for constructing links and generating URLs based on the current route.
    For example, if the current URL is "/user/123," `match.url` will be "/user/123."
-
-3. **`match.path`**: A string representing the path pattern specified in the `<Route>` component. It's helpful for determining the route pattern that led to the current URL match.
-
+3. `match.path`: A string representing the path pattern specified in the `<Route>` component. It's helpful for determining the route pattern that led to the current URL match.
    For the same example route, `match.path` would be "/user/:id."
-
 Here's how you typically access and use `props.match` in a React component:
-
 ```jsx
 import { Route } from 'react-router-dom';
-
 const UserProfile = (props) => {
   // Access match.params to get route parameters
   const { id } = props.match.params;
-
   // Access match.url and match.path to work with URLs
   const { url, path } = props.match;
-
   return (
     <div>
       <h1>User Profile</h1>
@@ -1043,7 +1007,6 @@ const UserProfile = (props) => {
     </div>
   );
 };
-
 const App = () => {
   return (
     <div>
@@ -1052,7 +1015,6 @@ const App = () => {
   );
 };
 ```
-
 In this example, the `UserProfile` component receives `props.match` as a prop and extracts the route parameters, URL, and path information. This enables you to create dynamic and data-driven components that respond to different routes and their associated data.
 
 
