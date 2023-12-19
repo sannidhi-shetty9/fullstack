@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amplitude-Time Graph</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <input type="file" id="fileInput" accept="audio/*">
+  <canvas id="amplitudeChart" width="800" height="400"></canvas>
+
+  <script>
+    document.getElementById('fileInput').addEventListener('change', handleFile);
+
+    function handleFile(event) {
+      var file = event.target.files[0];
+
+      if (file) {
+        readAudioFile(file);
+      }
+    }
+
+    function readAudioFile(file) {
+      var reader = new FileReader();
+
+      reader.onload = function(event) {
+        var audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        var audioData = event.target.result;
+
+        audioContext.decodeAudioData(audioData, function(buffer) {
+          // Get amplitude data
+          var amplitudeData = getAmplitudeData(buffer);
+
+          // Plot amplitude-time graph
+          plotAmplitudeGraph(amplitudeData);
+        });
+      };
+
+      reader.readAsArrayBuffer(file);
+    }
+
+    function getAmplitudeData(buffer) {
+      var channels = buffer.numberOfChannels;
+      var sampleRate = buffer.sampleRate;
+      var duration = buffer.duration;
+      var amplitudeData = [];
+
+      // Iterate over each channel
+      for (var channel = 0; channel < channels; channel++) {
+        var channelData = buffer.getChannelData(channel);
+
+        // Calculate time values
+        var times = new Float32Array(channelData.length);
+        for (var i = 0; i < channelData.length; i++) {
+          times[i] = i / sampleRate;
+        }
+
+        amplitudeData.push({
+          channel: channel,
+          times: times,
+          amplitudes: channelData,
+        });
+      }
+
+      return amplitudeData;
+    }
+
+    function plotAmplitudeGraph(amplitudeData) {
+      var ctx = document.getElementById('amplitudeChart').getContext('2d');
+      var datasets = [];
+
+      amplitudeData.forEach(function(data) {
+        datasets.push({
+          label: 'Channel ' + data.channel,
+          data: data.amplitudes,
+          borderColor: getRandomColor(),
+          borderWidth: 1,
+          fill: false,
+        });
+      });
+
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: amplitudeData[0].times, // Assuming all channels have the same duration
+          datasets: datasets,
+        },
+        options: {
+          scales: {
+            x: {
+              type: 'linear',
+              position: 'bottom',
+              title: {
+                display: true,
+                text: 'Time (seconds)',
+              },
+            },
+            y: {
+              type: 'linear',
+              position: 'left',
+              title: {
+                display: true,
+                text: 'Amplitude',
+              },
+            },
+          },
+        },
+      });
+    }
+
+    function getRandomColor() {
+      var letters = '0123456789ABCDEF';
+      var color = '#';
+      for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+  </script>
+
+</body>
+</html>

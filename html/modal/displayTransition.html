@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        /* width: 100%;
+        height: 100%; */
+        box-sizing: border-box;
+        margin: 0;
+      }
+      .Fc {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .W-100 {
+        width: 100%;
+      }
+
+      .W-10 {
+        width: 10%;
+      }
+
+      .H-100 {
+        height: 100%;
+      }
+
+      .H-10 {
+        height: 10%;
+      }
+
+      .Br-g {
+        border: 1px solid green;
+      }
+
+      .Br-p {
+        border: 1px solid red;
+      }
+
+      .Bg-g {
+        background-color: gray;
+      }
+
+      .Bg-w {
+        background-color: white;
+      }
+
+      .D-i {
+        display: inline;
+      }
+
+      .D-n {
+        display: none;
+      }
+
+      .M-10 {
+        margin: 10px;
+      }
+
+
+      .FadeIn {
+        animation: fadeIn 2s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      .FadeOut {
+        opacity: 0.2;
+        transition: opacity 2s;
+      }
+
+     
+    </style>
+  </head>
+  <body>
+    <!-- <div class="Fc W-100 H-100 Br-p Bg-g"> -->
+    <button class="M-10" id="btn">open</button>
+      <span class="Fc Bg-w Br-p W-10 H-10 Br-g M-10 FadeIn" id="fade">hello</span>
+    <!-- </div> -->
+
+    <script>
+      const fadeElem = document.getElementById("fade");
+      const btnElem = document.getElementById("btn");
+      btnElem.addEventListener("click", (e) => {
+        fadeElem.classList.remove("D-n")
+        fadeElem.classList.add("FadeIn")
+      })
+      fadeElem.addEventListener("click", (e) => {
+        console.log("- :", fadeElem.classList, " | ");
+        fadeElem.classList.replace("FadeIn", "FadeOut");
+        console.log(fadeElem.classList);
+        setTimeout(() => {
+            // fadeElem.parentElement.removeChild(fadeElem)
+            fadeElem.classList.replace("FadeOut", "D-n")
+        }, 3000)
+      });
+    </script>
+  </body>
+</html>

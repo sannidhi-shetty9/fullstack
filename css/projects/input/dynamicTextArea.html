@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamically Increasing TextArea Height</title>
+  <style>
+    /* Style to make textarea resizable */
+    textarea {
+      resize: vertical;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Textarea with dynamic height -->
+<textarea id="dynamicTextArea" rows="1" placeholder="Type something..."></textarea>
+
+<script>
+  // JavaScript to dynamically adjust textarea height
+  const textarea = document.getElementById('dynamicTextArea');
+
+  textarea.addEventListener('input', function () {
+    // Set the height to auto to calculate the scrollHeight
+    this.style.height = 'auto';
+    // Set the height to the scrollHeight, allowing it to grow
+    this.style.height = this.scrollHeight + 'px';
+  });
+</script>
+
+</body>
+</html>

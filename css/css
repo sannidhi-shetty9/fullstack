@@ -200,6 +200,61 @@ In CSS, the `display` property is used to control how an element is displayed on
 These are just a few of the common `display` property values. Each value has its own unique properties and behaviors, and understanding how they work is crucial for designing and controlling the layout of web pages effectively. Keep in mind that the choice of `display` value can significantly affect the positioning and interaction of elements within the CSS box model.
 
 
+--------------
+POSITION
+In CSS, the `position` property is used to control the positioning of an element within its containing element. The `position` property can take several values, each determining the type of positioning used. Here are the main values for the `position` property:
+1. **Static (Default):**
+   - Elements are positioned according to the normal flow of the document.
+   - The `top`, `right`, `bottom`, and `left` properties have no effect when `position` is set to `static`.
+   ```css
+   .example {
+     position: static;
+   }
+   ```
+2. **Relative:**
+   - Elements are positioned relative to their normal position.
+   - The `top`, `right`, `bottom`, and `left` properties can be used to adjust the position relative to its normal position.
+   ```css
+   .example {
+     position: relative;
+     top: 10px;
+     left: 20px;
+   }
+   ```
+3. **Absolute:**
+   - Elements are positioned relative to their nearest positioned ancestor (instead of positioned relative to the viewport, like fixed).
+   - If there is no positioned ancestor, it is positioned relative to the initial containing block (usually the `<html>` element).
+   - The `top`, `right`, `bottom`, and `left` properties can be used to set the position.
+
+   ```css
+   .example {
+     position: absolute;
+     top: 10px;
+     left: 20px;
+   }
+   ```
+4. **Fixed:**
+   - The element is positioned relative to the browser window or the containing block established by a nearest positioned ancestor.
+   - It stays fixed even when the page is scrolled.
+   ```css
+   .example {
+     position: fixed;
+     top: 10px;
+     left: 20px;
+   }
+   ```
+5. **Sticky:**
+   - The element is treated as `relative` positioned until it crosses a specified point, then it is treated as `fixed` positioned.
+   - The `top`, `right`, `bottom`, and `left` properties are used to specify the point where the element is no longer sticky.
+   ```css
+   .example {
+     position: sticky;
+     top: 10px;
+   }
+   ```
+These positioning values allow you to control the layout and positioning of elements on the page. The choice of which to use depends on the desired behavior and the context of your layout.
+
+
 
 ---------
 VISIBLITY
@@ -345,3 +400,154 @@ Now, create your HTML structure with the flex container and flex items:
 ```
 In this example, the second flex item with the class `.stretch-item` will be stretched along the cross-axis, while the other items will retain their default cross-axis size.
 This way, you can selectively apply stretching behavior to specific child elements within the flex container while leaving others unchanged.
+
+
+------------
+MODAL
+A modal, in the context of web development and design, is a dialog box or popup that appears on top of the main content to display additional information, interact with the user, or confirm an action. CSS is used in conjunction with HTML and JavaScript to create and style modals. Here's a basic example of how to create a simple CSS modal:
+HTML structure:
+```html
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>This is a simple modal.</p>
+  </div>
+</div>
+<button id="openModalBtn">Open Modal</button>
+```
+CSS styles:
+```css
+/* Styles for the modal container */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+/* Styles for the modal content */
+.modal-content {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  width: 60%;
+  max-width: 400px;
+  margin: 0 auto;
+  margin-top: 10%;
+  padding: 20px;
+  text-align: center;
+  border-radius: 5px;
+}
+/* Style for the close button */
+.close {
+  color: #000;
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
+/* Style for the close button on hover */
+.close:hover {
+  color: #f00;
+}
+```
+JavaScript to control the modal:
+```javascript
+// Get the modal element and open button
+var modal = document.getElementById("myModal");
+var openModalBtn = document.getElementById("openModalBtn");
+// Get the close button
+var closeBtn = document.querySelector(".close");
+// Function to open the modal
+openModalBtn.addEventListener("click", function() {
+  modal.style.display = "block";
+});
+// Function to close the modal
+closeBtn.addEventListener("click", function() {
+  modal.style.display = "none";
+});
+// Close the modal if the user clicks outside of it
+window.addEventListener("click", function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+});
+```
+This code creates a basic modal that is initially hidden and becomes visible when the "Open Modal" button is clicked. The modal can be closed by clicking the "x" button or anywhere outside the modal. You can further customize and enhance your modals to suit your specific needs and design preferences.
+
+
+---------
+
+OBJECT-FIT
+The `object-fit` property in CSS is used to control how an inline replaced element (such as an `img`, `video`, `object`, or `iframe`) should be resized and fitted into its container. There are several values for the `object-fit` property, each affecting how the content is displayed within the container. Here are the main values:
+
+1. **`fill`**:
+   - The default value.
+   - The replaced element is stretched to completely fill the container both horizontally and vertically. The aspect ratio may not be maintained.
+
+   ```css
+   object-fit: fill;
+   ```
+
+2. **`contain`**:
+   - The replaced element is scaled to maintain its aspect ratio while fitting within the container. It may leave empty space within the container if the aspect ratio of the container and the replaced element differs.
+
+   ```css
+   object-fit: contain;
+   ```
+
+3. **`cover`**:
+   - The replaced element is scaled to maintain its aspect ratio while covering the entire container. This may result in some parts of the element being clipped if the aspect ratios differ.
+
+   ```css
+   object-fit: cover;
+   ```
+
+4. **`none`**:
+   - The replaced element is not resized or scaled. It retains its original size and may overflow the container.
+
+   ```css
+   object-fit: none;
+   ```
+
+5. **`scale-down`**:
+   - The replaced element is scaled to the smaller of its container's dimensions or its own intrinsic dimensions. It ensures that the entire content is visible and doesn't overflow the container.
+
+   ```css
+   object-fit: scale-down;
+   ```
+
+Each of these values offers different ways to handle the sizing and fitting of replaced elements within their containers. The choice of `object-fit` value depends on the specific design and layout requirements of your web page.
+
+
+-----------
+HIDE SCROLL BAR CLASS
+
+.hidden-scrollbar {
+  overflow: hidden;
+}
+
+/* Hide scrollbar for WebKit browsers (Chrome, Safari) */
+.hidden-scrollbar::-webkit-scrollbar {
+  width: 0;
+}
+
+/* Optional: Hide scrollbar for Firefox */
+.hidden-scrollbar {
+  scrollbar-width: none;
+}
+
+.hidden-scrollbar::-webkit-scrollbar-thumb {
+  background-color: transparent; /* Make scrollbar thumb transparent */
+}
+
+.hidden-scrollbar::-webkit-scrollbar-track {
+  background-color: transparent; /* Make scrollbar track transparent */
+}
+
+
+-------------
+
+
+

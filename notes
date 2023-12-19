@@ -1,0 +1,191 @@
+import { useAllReduxHooks } from "../../../../utils/useReduxState";
+import { useState } from "react";
+import { useApiService } from "../../../../utils/apiService/useApiService";
+
+export const useVerifyEmailandSendOtp = (
+  email,
+  setOpen,
+  setVerifyExistingEmail
+) => {
+  const [currentEmail, setCurrentEmail] = useState(email);
+  const [password, setPassword] = useState("");
+  const { isRememberActivated } = useAllReduxHooks();
+  const [incorrectPassword, setIncorrectPassword] = useState(false);
+  const [isEmailExist, setIsEmailExist] = useState(false);
+  const { ApiCall } = useApiService();
+
+  const handleverifyExistingEmail = async () => {
+    try {
+      const response = await ApiCall({
+        url: `api/UserSetting/ValidateUser`,
+        postData: {
+          username: currentEmail,
+          password: password,
+          isRemembermeChecked: isRememberActivated !== null ? true : false,
+        },
+        method: "post",
+      });
+
+      if (response.status === 200) {
+        handlleSendOtp({ isOldEmail: true });
+      }
+    } catch (e) {
+      if (e?.response?.data?.message === "The password is incorrect.") {
+        setIncorrectPassword(true);
+      }
+    }
+  };
+
+  const handlleSendOtp = async ({
+    isOldEmail,
+    confirmNewEmail,
+    setSendOtp,
+  }) => {
+    try {
+      const response = await ApiCall({
+        url: `api/UserSetting/SendOTPToEmail?emailId=${
+          confirmNewEmail ? confirmNewEmail : email
+        }&isOldEmail=${isOldEmail}&isResent=false`,
+        method: "get",
+      });
+
+      if (response.status === 200) {
+        if (isOldEmail === true) {
+          setVerifyExistingEmail(true);
+          setOpen(false);
+        }
+        setSendOtp(true);
+      }
+    } catch (e) {
+      if (e?.response?.data?.message === "User already exists!") {
+        setIsEmailExist(true);
+      }
+    }
+  };
+
+  return {
+    handleverifyExistingEmail,
+    currentEmail,
+    setCurrentEmail,
+    password,
+    setPassword,
+    handlleSendOtp,
+    incorrectPassword,
+    isEmailExist,
+  };
+};
+
+export const useVerifyEmailOtp = () => {
+  const [inputValues, setInputValues] = useState(["", "", "", "", "", ""]);
+  const [otpSend, setOtpSend] = useState(false);
+  const [incorrectOtp, setIncorrectOtp] = useState(false);
+  const { ApiCall } = useApiService();
+
+  const allNonEmpty = inputValues.every((value) => value !== "");
+
+  const verifyOtp = async (
+    email,
+    userData,
+    setModalOpen,
+    setEmailVerifiedModalOpen,
+    confirmNewEmail,
+    setNewEmailVerifiedModalOpen,
+    setverifyNewMEmailModalOpen,
+
+    // sa
+    setShowIncorrectOtpMsg,
+  ) => {
+    const sendData = {
+      otp: inputValues.join(""),
+      emailId: email,
+      newEmailId: confirmNewEmail ? confirmNewEmail : "",
+      isNewEmailValidation: confirmNewEmail ? true : false,
+    };
+
+    try {
+      const response = await ApiCall({
+        url: `api/UserSetting/ValidateEmailOTP`,
+        method: "post",
+        postData: sendData,
+      });
+
+      if (response.status === 200) {
+        setOtpSend(true);
+
+        // sa
+        console.log('otp verification success')
+        setEmailVerifiedModalOpen(true)
+        setModalOpen(false)
+        setIncorrectOtp(false)
+        setShowIncorrectOtpMsg(false)
+
+      }
+
+      // sa
+      else {
+      console.log('otp verification fail')
+
+        setShowIncorrectOtpMsg(true)
+
+      }
+
+    } catch (e) {
+      setIncorrectOtp(true);
+      // if (e.response.data.message === "The password is incorrect.") {
+      //   setIncorrectPassword(true);
+      // }
+
+      //sa
+      console.log('otp verification  error fail', e)
+      setOtpSend(false)
+      setShowIncorrectOtpMsg(true)
+    }
+  };
+  return {
+    verifyOtp,
+    inputValues,
+    setInputValues,
+    allNonEmpty,
+    otpSend,
+    incorrectOtp,
+  };
+};
+
+export const useNewPasswordGenerate = () => {
+  const [passwordGenerated, setPasswordGenerated] = useState(false);
+  const [incorrectPassword, setincorrectPassword] = useState(false);
+  const { ApiCall } = useApiService();
+  const generateNewPassword = async (
+    email,
+    currentPassword,
+    newPassword,
+    userData
+  ) => {
+    try {
+      const response = await ApiCall({
+        url: `api/UserSetting/ChangePassword`,
+        postData: {
+          emailId: email,
+          currentPassword,
+          newPassword,
+        },
+        method: "post",
+      });
+
+      if (response.status === 200) {
+        setPasswordGenerated(true);
+      }
+    } catch (e) {
+      setincorrectPassword(true);
+    }
+  };
+
+  return { generateNewPassword, passwordGenerated, incorrectPassword };
+};
+
+export const useResendOtp = (email, userData, setInputValues, newEmail) => {
+  // console.log(newEmail);
+  const resendOtp = async () => {};
+
+  return { resendOtp };
+};

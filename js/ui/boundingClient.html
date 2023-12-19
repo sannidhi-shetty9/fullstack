@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      #myElement {
+        width: 100px;
+        height: 100px;
+        background-color: orange;
+        transition: transform 0.3s ease-in-out;
+      }
+    </style>
+    <title>getBoundingClientRect Example</title>
+  </head>
+  <body>
+    <div id="myElement" onclick="logElementSize()">Click me!</div>
+
+    <script>
+      function logElementSize() {
+        const myElement = document.getElementById("myElement");
+        const rect = myElement.getBoundingClientRect();
+
+        console.log("Element size and position:", rect);
+        console.log("Top:", rect.top);
+        console.log("Left:", rect.left);
+        console.log("Bottom:", rect.bottom);
+        console.log("Right:", rect.right);
+        console.log("Width:", rect.width);
+        console.log("Height:", rect.height);
+      }
+
+      /*
+  The getBoundingClientRect() method is used to get the size of an element and its position relative to the viewport. It returns a DOMRect object that provides information about the size of an element and its position on the page.
+
+  The logElementSize function is called when the element is clicked.
+
+Inside the function, getBoundingClientRect() is used to get the size and position of the element.
+
+The results are then logged to the console. The DOMRect object has properties like top, left, width, and height, which provide information about the element's position and size.
+  */
+    </script>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .collapsible-container {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+
+    .collapsible-content {
+      padding: 10px;
+      background-color: #f9f9f9;
+    }
+
+    .collapsible-trigger {
+      cursor: pointer;
+    }
+  </style>
+  <title>Height Transition Example</title>
+</head>
+<body>
+
+<div class="collapsible-trigger" onclick="toggleCollapsible()">Toggle Content</div>
+<div class="collapsible-container">
+  <div class="collapsible-content">
+    <!-- Your content goes here -->
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi.
+  </div>
+</div>
+
+<script>
+  function toggleCollapsible() {
+    var collapsible = document.querySelector('.collapsible-container');
+    collapsible.style.maxHeight = collapsible.style.maxHeight === '0px' ? collapsible.scrollHeight + 'px' : '0';
+  }
+</script>
+
+</body>
+</html>

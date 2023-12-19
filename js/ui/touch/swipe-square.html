@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    #parentElement {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #swipeSquare {
+      width: 50px;
+      height: 50px;
+      background-color: lightblue;
+      /* position: absolute; */
+      position: relative;
+      /* transition: left 0.1s, top 0.1s ; */
+    }
+  </style>
+  <title>Swipe and Move Square</title>
+</head>
+<body>
+
+<div id="parentElement" ontouchstart="handleTouchStart(event)" ontouchmove="handleTouchMove(event)">
+  <div id="swipeSquare"></div>
+</div>
+
+<script>
+  const parentElement = document.getElementById('parentElement');
+  const swipeSquare = document.getElementById('swipeSquare');
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let squareOffsetX = 0;
+  let squareOffsetY = 0;
+
+  function handleTouchStart(event) {
+    touchStartX = event.touches[0].clientX;
+    touchStartY = event.touches[0].clientY;
+    squareOffsetX = 0; // Reset square offsets
+    squareOffsetY = 0;
+  }
+
+  function handleTouchMove(event) {
+    const touchEndX = event.touches[0].clientX;
+    const touchEndY = event.touches[0].clientY;
+    const touchDiffX = touchEndX - touchStartX;
+    const touchDiffY = touchEndY - touchStartY;
+
+    // Update square positions
+    squareOffsetX += touchDiffX;
+    squareOffsetY += touchDiffY;
+
+    // Move the square along with the touch movement , -25 is to center the square to touch point will be the top left of the square
+    swipeSquare.style.left = `${touchEndX-25}px`;
+    swipeSquare.style.top = `${touchEndY-25}px`;
+  }
+</script>
+
+</body>
+</html>
