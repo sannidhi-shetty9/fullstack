@@ -341,3 +341,113 @@ git pull origin main
 This command will fetch the latest changes from the "main" branch in the "origin" remote and attempt to merge them into your currently checked-out branch.
 
 --------
+GIT STASH
+In Git, the `git stash` command is used to temporarily save changes in your working directory that are not ready to be committed. This can be useful in situations where you want to switch to a different branch or perform some other operation that requires a clean working directory.
+
+Here are some common use cases for `git stash`:
+
+1. **Switching Branches:**
+   ```bash
+   git stash
+   git checkout <branch_name>
+   # Do some work on the new branch
+   git stash apply
+   ```
+
+2. **Saving Changes before Pulling:**
+   ```bash
+   git stash
+   git pull
+   git stash apply
+   ```
+
+3. **Saving Changes for Clean Build:**
+   ```bash
+   git stash
+   # Run a clean build
+   git stash apply
+   ```
+
+4. **Dealing with Uncommitted Changes:**
+   ```bash
+   git stash save "Work in progress"
+   git stash list
+   git stash apply stash@{0}
+   ```
+
+The `git stash` command can be customized with options like `--keep-index` to stash changes but keep the changes in the index (staged changes), or `--include-untracked` to include untracked files when stashing.
+
+Here is a basic example of using `git stash`:
+
+```bash
+# Save your changes to a stash
+git stash
+
+# Do some other work, switch branches, etc.
+
+# Apply the changes back from the stash
+git stash apply
+```
+
+Remember that stashes are stack-based, so you can have multiple stashes and apply them in the order they were created. You can use `git stash list` to see a list of your stashes.
+
+Keep in mind that stashing is a local operation, and stashes are not shared between repositories. If you need to share changes, you may want to consider creating a branch, committing your changes, and then switching branches or merging as needed.
+
+
+------------
+DISCARD UNCOMMITTED CHANGES
+If you want to discard all your uncommitted changes in Git and revert your working directory to the state of the last commit, you can use the following command:
+
+```bash
+git reset --hard
+```
+
+This command resets the current branch to the latest commit and discards all changes in your working directory. Be cautious when using this command, as it's a destructive operation, and any uncommitted changes will be lost.
+
+If you have untracked files (files that Git is not currently tracking), you can also remove them using:
+
+```bash
+git clean -fdx
+```
+
+This command removes untracked files and directories from your working directory. The `-f` option is for force, and `-d` includes directories. The `-x` option is used to remove files specified in the `.gitignore` file.
+
+Again, use these commands with caution, especially the `git reset --hard` command, as it permanently discards changes.
+
+If you want to keep your changes but temporarily set them aside, you might consider using the `git stash` command, as I mentioned in the previous response. This allows you to save your changes to a temporary stash, and later you can apply them back using `git stash apply` or `git stash pop`.
+
+
+---------------
+If you want to discard your uncommitted changes and get the latest code from the repository, you have a few options. Here are two common approaches:
+
+### Option 1: Discard Uncommitted Changes and Fetch Latest Code
+
+```bash
+# Discard uncommitted changes in your working directory
+git reset --hard
+
+# Fetch the latest code from the remote repository
+git fetch origin
+
+# Reset your local branch to match the remote branch
+git reset --hard origin/<branch_name>
+```
+
+In this approach, `git reset --hard` discards your uncommitted changes, and then `git fetch` fetches the latest changes from the remote repository without modifying your working directory. Finally, `git reset --hard origin/<branch_name>` resets your local branch to match the remote branch.
+
+### Option 2: Stash Changes and Pull
+
+```bash
+# Stash your changes
+git stash
+
+# Fetch the latest code and merge it into your branch
+git pull origin <branch_name>
+
+# Apply your stashed changes
+git stash apply
+```
+
+In this approach, `git stash` is used to stash your changes, then `git pull` fetches and merges the latest changes from the remote repository into your branch. Finally, `git stash apply` is used to apply your stashed changes back to your working directory.
+
+Choose the option that best fits your workflow. Keep in mind that the first option (`git reset --hard`) is more aggressive as it discards uncommitted changes without creating a stash, so use it with caution. The second option allows you to temporarily stash your changes before pulling the latest code.

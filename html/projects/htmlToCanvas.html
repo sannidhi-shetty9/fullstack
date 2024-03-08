@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML to Canvas Example</title>
+  <!-- Include html2canvas library from CDN -->
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <style>
+    /* Add some styling to the container */
+    #your-component {
+      border: 2px solid #333;
+      padding: 20px;
+      margin: 20px;
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Your HTML component to be converted to canvas -->
+  <div id="your-component">
+    <h1>Hello, World!</h1>
+    <p>This is an example HTML component.</p>
+  </div>
+
+  <!-- Add buttons to trigger conversion and download -->
+  <button onclick="convertAndPreview()">Convert and Preview</button>
+  <button onclick="downloadCanvas()">Download Image</button>
+
+  <script>
+    function convertAndPreview() {
+      const element = document.getElementById('your-component');
+
+      // Use html2canvas to render the element to a canvas
+      html2canvas(element).then(canvas => {
+        // Append the canvas to the document or do something else with it
+        document.body.appendChild(canvas);
+      });
+    }
+
+    function downloadCanvas() {
+      const element = document.getElementById('your-component');
+
+      // Use html2canvas to render the element to a canvas
+      html2canvas(element).then(canvas => {
+        // Create a download link
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = 'canvas_image.png';
+
+        // Trigger the download
+        link.click();
+
+        // Remove the temporary link from the document
+        document.body.removeChild(link);
+      });
+    }
+  </script>
+
+</body>
+</html>
