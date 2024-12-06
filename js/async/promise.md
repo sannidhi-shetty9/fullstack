@@ -154,3 +154,47 @@ In the example above:
 Promises can also be chained together using multiple `.then()` calls, allowing you to perform sequential asynchronous operations or handle dependencies between them. Additionally, Promises provide a more organized and readable way to handle asynchronous code compared to traditional callback-based approaches.
 
 ---
+
+
+`Promise.allSettled` and `Promise.all` are both methods available in JavaScript for handling multiple promises. However, they differ in how they handle the resolution of those promises:
+
+1. **Promise.allSettled**:
+   - Introduced in ECMAScript 2020 (ES11), `Promise.allSettled` returns a promise that resolves after all of the provided promises have either resolved or rejected, resulting in an array of objects representing the outcome of each promise.
+   - The objects in the resulting array have two properties: `status` and `value`. The `status` can be either `"fulfilled"` if the promise was resolved or `"rejected"` if the promise was rejected. The `value` contains the fulfillment value or rejection reason accordingly.
+   - This method is useful when you need to know the outcome of all the promises, regardless of whether they were resolved or rejected.
+
+Example:
+```javascript
+const promises = [Promise.resolve(1), Promise.reject('error'), Promise.resolve(3)];
+
+Promise.allSettled(promises)
+  .then(results => {
+    results.forEach(result => {
+      if (result.status === 'fulfilled') {
+        console.log('Fulfilled:', result.value);
+      } else {
+        console.log('Rejected:', result.reason);
+      }
+    });
+  });
+```
+
+2. **Promise.all**:
+   - `Promise.all` returns a single Promise that resolves when all of the promises in the iterable argument have resolved, or rejects with the reason of the first promise that rejects.
+   - If any of the input promises rejects, the whole `Promise.all` rejects immediately, without waiting for the rest of the promises to complete.
+   - This method is suitable when you need to wait for all promises to fulfill successfully before proceeding, and you're not interested in individual outcomes if any of them fail.
+
+Example:
+```javascript
+const promises = [Promise.resolve(1), Promise.reject('error'), Promise.resolve(3)];
+
+Promise.all(promises)
+  .then(values => {
+    console.log('All promises resolved:', values);
+  })
+  .catch(error => {
+    console.error('Some promise rejected:', error);
+  });
+```
+
+In summary, `Promise.allSettled` provides a way to handle multiple promises and get information about all of them, regardless of their outcome, while `Promise.all` is suitable when you need all promises to succeed and want to handle them collectively.

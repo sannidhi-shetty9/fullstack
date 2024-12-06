@@ -551,3 +551,129 @@ HIDE SCROLL BAR CLASS
 
 
 
+CSS pseudo-classes are keywords that specify a special state of the selected elements. They are used to style elements based on various criteria such as user interaction, element structure, or state. Here are some common CSS pseudo-classes:
+
+1. **:hover**: This pseudo-class is used to style an element when the user hovers over it with the mouse.
+
+Example:
+```css
+a:hover {
+  color: red;
+}
+```
+
+2. **:active**: This pseudo-class is used to style an element while it is being activated by the user.
+
+Example:
+```css
+button:active {
+  background-color: green;
+}
+```
+
+3. **:focus**: This pseudo-class is used to style an element when it gains focus, such as when it is clicked or tapped on.
+
+Example:
+```css
+input:focus {
+  border-color: blue;
+}
+```
+
+4. **:visited**: This pseudo-class is used to style links that have been visited by the user.
+
+Example:
+```css
+a:visited {
+  color: purple;
+}
+```
+
+5. **:nth-child()**: This pseudo-class allows you to select elements based on their position within a parent element.
+
+Example:
+```css
+li:nth-child(odd) {
+  background-color: lightgray;
+}
+```
+
+6. **:first-child**, **:last-child**: These pseudo-classes select the first or last child element of its parent.
+
+Example:
+```css
+ul li:first-child {
+  font-weight: bold;
+}
+```
+
+7. **:nth-of-type()**: This pseudo-class selects elements based on their position among siblings of the same type.
+
+Example:
+```css
+p:nth-of-type(2n) {
+  color: blue;
+}
+```
+
+These are just a few examples of CSS pseudo-classes. They are powerful tools for styling elements based on various conditions and states.
+
+---
+It seems like you might be referring to CSS pseudo-selectors, also known as pseudo-elements. Pseudo-selectors allow you to select and style a specific part of an element's content or structure. Here are some common pseudo-selectors:
+
+1. **::before**: This pseudo-selector inserts content before the content of the selected element.
+
+Example:
+```css
+p::before {
+  content: "Before text ";
+}
+```
+
+2. **::after**: This pseudo-selector inserts content after the content of the selected element.
+
+Example:
+```css
+p::after {
+  content: " After text";
+}
+```
+
+3. **::first-line**: This pseudo-selector selects the first line of text within the selected element.
+
+Example:
+```css
+p::first-line {
+  font-weight: bold;
+}
+```
+
+4. **::first-letter**: This pseudo-selector selects the first letter of the text within the selected element.
+
+Example:
+```css
+p::first-letter {
+  font-size: 150%;
+}
+```
+
+5. **::selection**: This pseudo-selector selects the portion of text that has been selected by the user.
+
+Example:
+```css
+::selection {
+  background-color: yellow;
+  color: black;
+}
+```
+
+6. **::placeholder**: This pseudo-selector selects placeholder text within form elements.
+
+Example:
+```css
+input::placeholder {
+  color: gray;
+}
+```
+
+These are some of the commonly used CSS pseudo-selectors. They allow you to style specific parts of elements or add content dynamically, enhancing the visual presentation and functionality of your web pages.

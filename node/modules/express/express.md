@@ -298,3 +298,73 @@ In this example, the parent route (`/parent`) has its own router (`parentRouter`
 3. **Modularization**: Nested routes provide a modular structure, making it easier to manage and scale large applications.
 
 By using nested routes in Express, you can create a well-organized and maintainable application structure, leading to better code readability and scalability.
+
+------
+Sure, let's explore a more comprehensive example of nested routes in Express.js, including multiple levels of nesting:
+
+```javascript
+const express = require('express');
+const app = express();
+
+// Parent route
+app.get('/parent', function(req, res) {
+    res.send('This is the parent route');
+  
+    // Child route
+    app.get('/child', function(req, res) {
+        res.send('This is the child route');
+      
+        // Grandchild route
+        app.get('/grandchild', function(req, res) {
+            res.send('This is the grandchild route');
+        });
+    });
+});
+
+app.listen(3000, function() {
+    console.log('Server is running on port 3000');
+});
+```
+
+In this example, we have three levels of nested routes:
+
+1. **Parent Route**: `/parent`
+2. **Child Route**: `/parent/child`
+3. **Grandchild Route**: `/parent/child/grandchild`
+
+Each route is defined within its parent route's callback function. However, as mentioned earlier, this approach may not be ideal for complex applications due to potential unexpected behavior and code clutter.
+
+A better approach is to use Express Router for nested routes:
+
+```javascript
+const express = require('express');
+const app = express();
+const parentRouter = express.Router();
+const childRouter = express.Router();
+const grandchildRouter = express.Router();
+
+// Grandchild route
+grandchildRouter.get('/', function(req, res) {
+    res.send('This is the grandchild route');
+});
+
+// Child route
+childRouter.use('/child', grandchildRouter);
+childRouter.get('/', function(req, res) {
+    res.send('This is the child route');
+});
+
+// Parent route
+parentRouter.use('/parent', childRouter);
+parentRouter.get('/', function(req, res) {
+    res.send('This is the parent route');
+});
+
+app.use(parentRouter);
+
+app.listen(3000, function() {
+    console.log('Server is running on port 3000');
+});
+```
+
+This approach provides better organization and clarity. Each level of the route hierarchy has its own router, making it easier to manage and scale routes in larger applications. Additionally, it prevents potential conflicts and unexpected behavior that may occur when defining routes within other routes directly in the main application instance.
