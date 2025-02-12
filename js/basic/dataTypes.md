@@ -247,6 +247,11 @@ Certainly! Here are more built-in methods that can be used with objects in JavaS
 
 These methods provide powerful capabilities for working with objects in JavaScript, allowing you to manipulate properties, clone objects, control inheritance, and more. Understanding these methods and how to use them effectively can greatly enhance your ability to work with objects in JavaScript.
 
+18.  loop: 
+      for(const key in obj) {
+
+      }
+
 ---
 
 ARRAY
@@ -494,7 +499,15 @@ Sure, here are some more commonly used array methods in JavaScript along with ex
     console.log(evenIndex); // Output: 1
     ```
 
-These array methods provide powerful ways to manipulate and work with arrays in JavaScript. Understanding how to use them effectively can simplify your code and make it more expressive and concise.
+17.   arr.fill(0, 2)  -> fills array with value 0 starting from index 2
+
+18. let newArr = arr.flat(2) -> flats any array for depth 2   (removes out nested elements) and returns a new array
+
+19.  Array.from (iterable object) -> creates an array from an iterable object  like array or set
+      const numbers = [1, 2, 2, 3, 4, 4];
+      const uniqueNumbers = [...new Set(numbers)];    // or   Array.from(new Set(numbers))
+      console.log(uniqueNumbers); // [1, 2, 3, 4]
+
 
 ---
 
@@ -691,4 +704,19 @@ Certainly! Here are some commonly used string methods in JavaScript along with e
     console.log(str.includes("World")); // Output: true
     ```
 
-These are just a few examples of string methods available in JavaScript. Understanding and mastering these methods will greatly enhance your ability to manipulate and work with strings effectively in your JavaScript code.
+
+15.  str.charCodeAT(0)  -> returns ascii value
+16. String.fromCharCode(65)  -> returns char for ascii value    'A'
+17.  let x= +"1"  -> + prefix converts to number
+   
+
+
+Number:
+
+
+1. num.toString()
+
+
+check palindrome: 
+
+x < 0? false : x === +x.toString().split("").reverse().join("")
