@@ -152,6 +152,70 @@ add(1,2,3)(4) // 10
 
 
 
+----
+
+// let input ='AAAABBBCCDAABBB';
+// // you have to converted into below expected array
+// // exected_output =['A','B','C','D','A','B'];
+
+
+// const strToArr = (str) => {
+//     let arr=[]
+//     let prev = ''
+//     for(let i=0; i<str.length; i++) {
+//         if(str[i] !== prev) {
+//             arr.push(str[i])
+//         }
+//         prev = str[i]
+//     }
+//     return arr
+// }
+
+// const res = strToArr(input)
+// console.log('res: ', res)
+ 
+ 
+let input = [1,2,3,4,3,4,6,7,8]
+// expected output :[3,4]
+
+
+const getDup = (arr) => {
+    let res = []
+    let obj = {}
+    arr.forEach((item) => {
+        if(!obj[item]) {
+            obj[item] = 1;
+        } else {
+            obj[item] = obj[item] + 1;
+        }
+    })
+    
+    Object.keys(obj).forEach(key => {
+        if(obj[key] > 1) {
+            res.push(key)
+        }
+    })
+    
+    return res
+}
+
+const res = getDup(input)
+console.log('res: ', res)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

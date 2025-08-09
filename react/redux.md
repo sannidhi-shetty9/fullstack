@@ -1,5 +1,98 @@
+FLUX:
+Flux is a pattern for managing how data flows through a React application using actions, a dispatcher, stores, and views, all following a strict one-way data flow.
 
 
+---
+
+### 🧩 Key Components of Flux
+
+1. **Actions**
+
+   * Plain JavaScript objects.
+   * They describe **what happened**.
+   * Example: `{ type: "ADD_TODO", payload: "Buy milk" }`
+
+2. **Dispatcher**
+
+   * A **central hub** that manages all data flow.
+   * It receives actions and **dispatches them** to registered **stores**.
+   * Each store registers with the dispatcher and receives every action.
+
+3. **Stores**
+
+   * Containers for **application state** and logic.
+   * They **listen** to actions and **update their state** accordingly.
+   * Not the same as a model in MVC; stores are more like **singletons**.
+
+4. **Views (React Components)**
+
+   * They **listen to stores** and re-render when store data changes.
+   * Trigger new **actions** based on user interactions.
+
+---
+
+### 🔄 Data Flow in Flux
+
+```
+User Action → Action Creator → Dispatcher → Stores → View (React)
+```
+
+1. The **user interacts** with the UI.
+2. A corresponding **action** is created.
+3. The action is sent to the **dispatcher**.
+4. The **dispatcher** sends the action to all **stores**.
+5. **Stores update** their state and emit change events.
+6. **Views re-render** based on updated store data.
+
+---
+
+### ✅ Benefits of Flux
+
+* **Predictable state management** due to unidirectional flow.
+* **Decoupled components** (UI doesn’t directly modify data).
+* Makes it easier to **debug** and **test**.
+
+---
+
+### ⚖️ Flux vs MVC
+
+| Flux                     | MVC                        |
+| ------------------------ | -------------------------- |
+| Unidirectional data flow | Bidirectional data flow    |
+| No direct model updates  | Views can update models    |
+| Easier to debug          | Can become tangled quickly |
+
+---
+
+### 🧠 Popular Implementations Inspired by Flux
+
+* **Redux** – A simplified and widely used version of Flux.
+* **Reflux**, **MobX** – Other Flux-like libraries with tweaks.
+
+
+-------
+
+Flux uses:
+
+Dispatcher: Central hub that sends actions to stores.
+
+Stores: Hold state and contain logic to handle actions.
+
+Stores register callbacks with the dispatcher and update state themselves when an action is received.
+
+Redux uses:
+
+Reducers: Pure functions that take the current state and an action, and return the new state.
+
+A single store for the entire app.
+
+No dispatcher (Redux replaces it with dispatch() function and reducer logic).
+
+
+
+-------
+
+REDUX:
 Redux is an open-source JavaScript library commonly used with React to manage the state of applications. It provides a predictable and centralized way to manage the state, making it especially useful for complex, data-driven applications. Redux follows the Flux architecture pattern and is inspired by functional programming concepts.
 Key concepts in Redux:
 1. Store: The central data store that holds the state of the entire application. The state is typically stored as a JavaScript object or data structure. The store is responsible for maintaining and updating the state.

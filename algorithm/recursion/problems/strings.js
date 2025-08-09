@@ -11,7 +11,7 @@ const stringReverse = (str) => str.split("").reverse().join(""); // string -> to
 
 const palindrome = (str) => str === stringReverse(str);
 
-const anagram = (str1, str2) => ((str1.length == str2.length) && (str1.split("").sort().join("") == str1.split("").sort().join("")));
+const anagram = (str1, str2) => ((str1.length == str2.length) && (str1.split("").sort().join("") == str2.split("").sort().join("")));
 
 str1 = "full stack"
 str2 = stringReverse(str1)

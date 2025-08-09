@@ -720,3 +720,143 @@ Number:
 check palindrome: 
 
 x < 0? false : x === +x.toString().split("").reverse().join("")
+
+
+----
+In JavaScript, `Number` is a **primitive data type** used to represent both **integers** and **floating-point** numbers.
+
+### Basic Info
+
+```js
+let a = 42;        // integer
+let b = 3.14;      // floating-point
+let c = -7;        // negative number
+let d = 1.5e3;     // scientific notation (1500)
+```
+
+---
+
+### Special Numeric Values
+
+```js
+let inf = Infinity;
+let negInf = -Infinity;
+let notANumber = NaN; // Not a Number
+```
+
+---
+
+### Type Checking
+
+```js
+typeof 123; // 'number'
+typeof NaN; // 'number' (yes, NaN is still of type number!)
+```
+
+---
+
+### Common Methods
+
+#### Using `Number` object:
+
+```js
+Number.isNaN(NaN);        // true
+Number.isFinite(100);     // true
+Number.parseInt("42");    // 42
+Number.parseFloat("3.14");// 3.14
+```
+
+---
+
+### Math Operations
+
+```js
+let sum = 10 + 5;      // 15
+let diff = 10 - 3;     // 7
+let prod = 4 * 2.5;    // 10
+let div = 10 / 2;      // 5
+let mod = 10 % 3;      // 1
+let pow = 2 ** 3;      // 8 (exponentiation)
+```
+
+---
+
+### Floating-Point Precision Issue
+
+```js
+0.1 + 0.2 === 0.3 // false due to precision error
+(0.1 + 0.2).toFixed(1) // "0.3"
+```
+
+---
+
+### Convert to Number
+
+```js
+Number("123");      // 123
++"123";             // 123 (unary plus)
+parseInt("12px");   // 12
+parseFloat("3.14"); // 3.14
+```
+
+--
+Here’s a **complete list of methods and properties available on the `Number` object** in JavaScript — categorized into:
+
+---
+
+## ✅ **1. Static Methods (called as `Number.method()`)**
+
+These are used to parse or validate values.
+
+| Method                          | Description                                                                        |
+| ------------------------------- | ---------------------------------------------------------------------------------- |
+| `Number.isFinite(value)`        | Checks if the value is a **finite number** (not `Infinity`, `-Infinity`, or `NaN`) |
+| `Number.isInteger(value)`       | Checks if the value is an **integer**                                              |
+| `Number.isNaN(value)`           | Checks if the value is **NaN**                                                     |
+| `Number.isSafeInteger(value)`   | Checks if the value is a **safe integer** (between `-(2^53 - 1)` and `2^53 - 1`)   |
+| `Number.parseFloat(value)`      | Converts a value to a **floating-point number**                                    |
+| `Number.parseInt(value, radix)` | Converts a value to an **integer**, optionally with a base (radix)                 |
+
+---
+
+## ✅ **2. Instance Methods (called on number values like `num.toFixed()`)**
+
+| Method                                 | Description                                                                         |
+| -------------------------------------- | ----------------------------------------------------------------------------------- |
+| `toExponential(fractionDigits)`        | Converts number to a string in **exponential (scientific) notation**                |
+| `toFixed(digits)`                      | Formats the number with **fixed decimal places**                                    |
+| `toLocaleString([locales], [options])` | Formats number according to a **locale** (e.g. currency, grouping)                  |
+| `toPrecision(digits)`                  | Formats number to a string with a **specific length**                               |
+| `toString([radix])`                    | Converts number to a **string**, optionally in a different base (binary, hex, etc.) |
+| `valueOf()`                            | Returns the **primitive value** of a Number object                                  |
+
+---
+
+## ✅ **3. Static Properties (constants)**
+
+| Property                   | Value                                                                            |
+| -------------------------- | -------------------------------------------------------------------------------- |
+| `Number.EPSILON`           | Smallest difference between two representable numbers (`≈2.220446049250313e-16`) |
+| `Number.MAX_SAFE_INTEGER`  | `9007199254740991` (`2^53 - 1`)                                                  |
+| `Number.MIN_SAFE_INTEGER`  | `-9007199254740991`                                                              |
+| `Number.MAX_VALUE`         | Largest possible number in JS (`≈1.7976931348623157e+308`)                       |
+| `Number.MIN_VALUE`         | Smallest positive number (`≈5e-324`)                                             |
+| `Number.NaN`               | The special `NaN` value                                                          |
+| `Number.NEGATIVE_INFINITY` | `-Infinity`                                                                      |
+| `Number.POSITIVE_INFINITY` | `Infinity`                                                                       |
+
+---
+
+## 🧠 Example Usage
+
+```js
+Number.isInteger(10); // true
+(123.456).toFixed(2); // "123.46"
+Number.parseFloat("3.14px"); // 3.14
+Number.MAX_SAFE_INTEGER; // 9007199254740991
+(123).toString(2); // "1111011" (binary)
+```
+
+---
+
+If you want a categorized printable cheat sheet or want to see which methods apply to `BigInt`, let me know!

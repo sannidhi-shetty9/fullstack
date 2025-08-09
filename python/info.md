@@ -878,3 +878,9 @@ while x < 10:
 ```
 
 These are some additional aspects and variations of loop statements in Python. Understanding and mastering these constructs will enable you to write more efficient and expressive code for various tasks and scenarios.
+
+
+
+
+------
+
