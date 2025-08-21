@@ -415,3 +415,61 @@ For the URL `/search?q=react`, `searchParams.get("q")` will return `"react"`.
 
 
 -----
+
+In **React Router** (v6+), navigating *back* and *forward* works similarly to a browser’s native history navigation — you just trigger it programmatically using the `useNavigate` hook.
+
+---
+
+### **Basic Back / Forward Navigation**
+
+```tsx
+import { useNavigate } from "react-router-dom";
+
+function MyComponent() {
+  const navigate = useNavigate();
+
+  return (
+    <div className="p-4 space-x-2">
+      {/* Go Back */}
+      <button onClick={() => navigate(-1)}>Back</button>
+
+      {/* Go Forward */}
+      <button onClick={() => navigate(1)}>Forward</button>
+    </div>
+  );
+}
+```
+
+* **`navigate(-1)`** → Goes **one step back** in history
+* **`navigate(1)`** → Goes **one step forward** in history
+* The number can be positive or negative for multiple steps:
+
+  * `navigate(-2)` → Go back 2 steps
+  * `navigate(3)` → Go forward 3 steps
+
+---
+
+### **Alternative with `window.history`**
+
+If you don’t need React Router’s API (and don’t mind depending on browser history directly):
+
+```tsx
+<button onClick={() => window.history.back()}>Back</button>
+<button onClick={() => window.history.forward()}>Forward</button>
+```
+
+* This works outside of React Router as well.
+
+---
+
+### **When to Use Which**
+
+* Use **`useNavigate()`** → Recommended when inside a React Router environment; it respects the app’s routing context.
+* Use **`window.history`** → For quick, framework-independent back/forward navigation (but loses React Router’s awareness of state).
+
+---
+
+If you want, I can also show you **how to handle cases where back/forward should be disabled if there’s no history entry** so buttons don’t break. Would you like me to?
+
+
+-----
